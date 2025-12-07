@@ -1,10 +1,13 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;500;600;700&display=swap");
+
 /* ==========================================
    DESIGN SYSTEM - Portfolio Data Science Gaming
    ==========================================
-   
+
    Ce fichier définit toutes les variables de style du site.
    Pour changer les couleurs du thème, modifiez les valeurs HSL ci-dessous.
-   
+
    HSL = Hue (teinte), Saturation, Lightness (luminosité)
    Exemple: 180 100% 50% = Cyan pur
 */
@@ -16,7 +19,7 @@
 /* ==========================================
    VARIABLES CSS - Thème Sombre Gaming
    ==========================================
-   
+
    :root définit les variables globales accessibles partout.
    Le thème sombre est par défaut (inspiré gaming/cyberpunk).
 */
@@ -27,29 +30,29 @@
        COULEURS DE FOND
        ------------------------------------------ */
     /* Fond principal - Noir profond avec légère teinte bleue */
-    --background: 222 47% 6%;
+    --background: 209 40% 96%;
     /* Texte principal - Blanc cassé pour meilleure lisibilité */
-    --foreground: 210 40% 98%;
+    --foreground: 222 47% 11%;
 
     /* ------------------------------------------
        COULEURS DES CARTES ET POPUPS
        ------------------------------------------ */
     /* Fond des cartes - Légèrement plus clair que le background */
-    --card: 222 47% 8%;
-    --card-foreground: 210 40% 98%;
-    
+    --card: 210 40% 98%;
+    --card-foreground: 222 47% 11%;
+
     /* Fond des popups/menus déroulants */
-    --popover: 222 47% 8%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 214 31% 91%;
+    --popover-foreground: 222 47% 11%;
 
     /* ------------------------------------------
        COULEUR PRIMAIRE - Cyan Néon (Accent Gaming)
        ------------------------------------------ */
     /* Couleur principale du site - Cyan brillant */
-    --primary: 180 100% 50%;
+    --primary: 216 19% 26%;
     /* Texte sur fond primary - Noir pour contraste */
-    --primary-foreground: 222 47% 6%;
-    
+    --primary-foreground: 210 19% 98%;
+
     /* Variante de la couleur primaire pour les dégradés */
     --primary-glow: 180 100% 70%;
 
@@ -57,9 +60,9 @@
        COULEUR SECONDAIRE - Violet/Magenta (Accent Animé)
        ------------------------------------------ */
     /* Seconde couleur d'accent - Magenta/Rose */
-    --secondary: 280 100% 60%;
+    --secondary: 215 19% 34%;
     --secondary-foreground: 210 40% 98%;
-    
+
     /* ------------------------------------------
        COULEUR TERTIAIRE - Pour les dégradés
        ------------------------------------------ */
@@ -69,17 +72,17 @@
        COULEURS UTILITAIRES
        ------------------------------------------ */
     /* Éléments atténués (texte secondaire, fonds subtils) */
-    --muted: 222 30% 15%;
-    --muted-foreground: 215 20% 65%;
+    --muted: 215 20% 65%;
+    --muted-foreground: 222 47% 11%;
 
     /* Couleur d'accentuation pour hover et focus */
-    --accent: 180 100% 20%;
-    --accent-foreground: 180 100% 70%;
+    --accent: 210 40% 98%;
+    --accent-foreground: 215 16% 46%;
 
     /* Couleur de destruction/erreur - Rouge */
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 210 40% 98%;
-    
+    --destructive: 0 72% 50%;
+    --destructive-foreground: 0 85% 97%;
+
     /* Couleur de succès - Vert */
     --success: 142 76% 45%;
     --success-foreground: 210 40% 98%;
@@ -88,34 +91,53 @@
        BORDURES ET INPUTS
        ------------------------------------------ */
     /* Couleur des bordures - Subtile avec teinte cyan */
-    --border: 180 30% 20%;
+    --border: 212 26% 83%;
     /* Bordure des champs de formulaire */
-    --input: 222 30% 15%;
+    --input: 212 26% 83%;
     /* Couleur de focus (outline) */
-    --ring: 180 100% 50%;
+    --ring: 216 19% 26%;
 
     /* ------------------------------------------
        RAYONS DE BORDURE (BORDER RADIUS)
        ------------------------------------------ */
-    --radius: 0.75rem;
+    --radius: 0rem;
 
     /* ------------------------------------------
        SIDEBAR (si utilisé)
        ------------------------------------------ */
     --sidebar-background: 222 47% 5%;
-    --sidebar-foreground: 210 40% 98%;
-    --sidebar-primary: 180 100% 50%;
-    --sidebar-primary-foreground: 222 47% 6%;
-    --sidebar-accent: 222 30% 12%;
+    --sidebar-foreground: 222 47% 11%;
+    --sidebar-primary: 216 19% 26%;
+    --sidebar-primary-foreground: 210 19% 98%;
+    --sidebar-accent: 215 19% 34%;
     --sidebar-accent-foreground: 210 40% 98%;
-    --sidebar-border: 180 30% 15%;
-    --sidebar-ring: 180 100% 50%;
+    --sidebar-border: 212 26% 83%;
+    --sidebar-ring: 216 19% 26%;
+    --chart-1: 217 10% 64%;
+    --chart-2: 215 20% 65%;
+    --chart-3: 215 16% 46%;
+    --chart-4: 219 8% 46%;
+    --chart-5: 215 19% 34%;
+    --sidebar: 210 40% 98%;
+    --font-sans: 'DM Sans', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif;
+    --font-serif: 'Crimson Pro', ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;
+    --font-mono: 'SF Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+    --shadow-2xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
+    --shadow-xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
+    --shadow-sm: 0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 1px 2px -1px hsl(0 0% 0% / 0.1);
+    --shadow: 0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 1px 2px -1px hsl(0 0% 0% / 0.1);
+    --shadow-md: 0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 2px 4px -1px hsl(0 0% 0% / 0.1);
+    --shadow-lg: 0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 4px 6px -1px hsl(0 0% 0% / 0.1);
+    --shadow-xl: 0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 8px 10px -1px hsl(0 0% 0% / 0.1);
+    --shadow-2xl: 0 1px 3px 0px hsl(0 0% 0% / 0.25);
+    --tracking-normal: 0em;
+    --spacing: 0.25rem;
   }
 
   /* ==========================================
      THÈME CLAIR (Optionnel)
      ==========================================
-     
+
      Si l'utilisateur préfère le mode clair,
      ces styles seront appliqués.
   */
@@ -143,6 +165,48 @@
     --border: 214 32% 91%;
     --input: 214 32% 91%;
     --ring: 180 100% 40%;
+  }
+  .dark {
+    --background: 222 47% 11%;
+    --foreground: 210 40% 98%;
+    --card: 217 32% 17%;
+    --card-foreground: 210 40% 98%;
+    --popover: 215 24% 26%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 212 26% 83%;
+    --primary-foreground: 228 84% 4%;
+    --secondary: 215 19% 34%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 215 16% 46%;
+    --muted-foreground: 210 40% 98%;
+    --accent: 228 84% 4%;
+    --accent-foreground: 215 20% 65%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 85% 97%;
+    --border: 215 19% 34%;
+    --input: 215 19% 34%;
+    --ring: 212 26% 83%;
+    --chart-1: 215 12% 83%;
+    --chart-2: 212 26% 83%;
+    --chart-3: 215 20% 65%;
+    --chart-4: 217 10% 64%;
+    --chart-5: 215 16% 46%;
+    --sidebar: 217 32% 17%;
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-primary: 212 26% 83%;
+    --sidebar-primary-foreground: 228 84% 4%;
+    --sidebar-accent: 215 20% 65%;
+    --sidebar-accent-foreground: 228 84% 4%;
+    --sidebar-border: 215 19% 34%;
+    --sidebar-ring: 212 26% 83%;
+    --shadow-2xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
+    --shadow-xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
+    --shadow-sm: 0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 1px 2px -1px hsl(0 0% 0% / 0.1);
+    --shadow: 0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 1px 2px -1px hsl(0 0% 0% / 0.1);
+    --shadow-md: 0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 2px 4px -1px hsl(0 0% 0% / 0.1);
+    --shadow-lg: 0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 4px 6px -1px hsl(0 0% 0% / 0.1);
+    --shadow-xl: 0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 8px 10px -1px hsl(0 0% 0% / 0.1);
+    --shadow-2xl: 0 1px 3px 0px hsl(0 0% 0% / 0.25);
   }
 }
 
@@ -195,7 +259,7 @@
   /* ------------------------------------------
      DÉGRADÉS
      ------------------------------------------ */
-  
+
   /* Dégradé principal Cyan -> Magenta */
   .gradient-primary {
     background: linear-gradient(
@@ -221,7 +285,7 @@
   /* ------------------------------------------
      EFFETS DE LUEUR (GLOW)
      ------------------------------------------ */
-  
+
   /* Lueur cyan pour les éléments importants */
   .glow-primary {
     box-shadow: 
@@ -244,7 +308,7 @@
   /* ------------------------------------------
      BORDURES ANIMÉES
      ------------------------------------------ */
-  
+
   /* Bordure avec dégradé animé */
   .border-gradient {
     position: relative;
