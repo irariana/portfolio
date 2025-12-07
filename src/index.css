@@ -1,105 +1,386 @@
+/* ==========================================
+   DESIGN SYSTEM - Portfolio Data Science Gaming
+   ==========================================
+   
+   Ce fichier définit toutes les variables de style du site.
+   Pour changer les couleurs du thème, modifiez les valeurs HSL ci-dessous.
+   
+   HSL = Hue (teinte), Saturation, Lightness (luminosité)
+   Exemple: 180 100% 50% = Cyan pur
+*/
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
+/* ==========================================
+   VARIABLES CSS - Thème Sombre Gaming
+   ==========================================
+   
+   :root définit les variables globales accessibles partout.
+   Le thème sombre est par défaut (inspiré gaming/cyberpunk).
 */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
-
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-
-    --radius: 0.5rem;
-
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
-  }
-
-  .dark {
-    --background: 222.2 84% 4.9%;
+    /* ------------------------------------------
+       COULEURS DE FOND
+       ------------------------------------------ */
+    /* Fond principal - Noir profond avec légère teinte bleue */
+    --background: 222 47% 6%;
+    /* Texte principal - Blanc cassé pour meilleure lisibilité */
     --foreground: 210 40% 98%;
 
-    --card: 222.2 84% 4.9%;
+    /* ------------------------------------------
+       COULEURS DES CARTES ET POPUPS
+       ------------------------------------------ */
+    /* Fond des cartes - Légèrement plus clair que le background */
+    --card: 222 47% 8%;
     --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
+    
+    /* Fond des popups/menus déroulants */
+    --popover: 222 47% 8%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    /* ------------------------------------------
+       COULEUR PRIMAIRE - Cyan Néon (Accent Gaming)
+       ------------------------------------------ */
+    /* Couleur principale du site - Cyan brillant */
+    --primary: 180 100% 50%;
+    /* Texte sur fond primary - Noir pour contraste */
+    --primary-foreground: 222 47% 6%;
+    
+    /* Variante de la couleur primaire pour les dégradés */
+    --primary-glow: 180 100% 70%;
 
-    --secondary: 217.2 32.6% 17.5%;
+    /* ------------------------------------------
+       COULEUR SECONDAIRE - Violet/Magenta (Accent Animé)
+       ------------------------------------------ */
+    /* Seconde couleur d'accent - Magenta/Rose */
+    --secondary: 280 100% 60%;
     --secondary-foreground: 210 40% 98%;
+    
+    /* ------------------------------------------
+       COULEUR TERTIAIRE - Pour les dégradés
+       ------------------------------------------ */
+    --tertiary: 320 100% 50%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    /* ------------------------------------------
+       COULEURS UTILITAIRES
+       ------------------------------------------ */
+    /* Éléments atténués (texte secondaire, fonds subtils) */
+    --muted: 222 30% 15%;
+    --muted-foreground: 215 20% 65%;
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    /* Couleur d'accentuation pour hover et focus */
+    --accent: 180 100% 20%;
+    --accent-foreground: 180 100% 70%;
 
-    --destructive: 0 62.8% 30.6%;
+    /* Couleur de destruction/erreur - Rouge */
+    --destructive: 0 84% 60%;
     --destructive-foreground: 210 40% 98%;
+    
+    /* Couleur de succès - Vert */
+    --success: 142 76% 45%;
+    --success-foreground: 210 40% 98%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    /* ------------------------------------------
+       BORDURES ET INPUTS
+       ------------------------------------------ */
+    /* Couleur des bordures - Subtile avec teinte cyan */
+    --border: 180 30% 20%;
+    /* Bordure des champs de formulaire */
+    --input: 222 30% 15%;
+    /* Couleur de focus (outline) */
+    --ring: 180 100% 50%;
+
+    /* ------------------------------------------
+       RAYONS DE BORDURE (BORDER RADIUS)
+       ------------------------------------------ */
+    --radius: 0.75rem;
+
+    /* ------------------------------------------
+       SIDEBAR (si utilisé)
+       ------------------------------------------ */
+    --sidebar-background: 222 47% 5%;
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-primary: 180 100% 50%;
+    --sidebar-primary-foreground: 222 47% 6%;
+    --sidebar-accent: 222 30% 12%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 180 30% 15%;
+    --sidebar-ring: 180 100% 50%;
+  }
+
+  /* ==========================================
+     THÈME CLAIR (Optionnel)
+     ==========================================
+     
+     Si l'utilisateur préfère le mode clair,
+     ces styles seront appliqués.
+  */
+  .light {
+    --background: 0 0% 98%;
+    --foreground: 222 47% 11%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+    --primary: 180 100% 35%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 180 100% 45%;
+    --secondary: 280 80% 50%;
+    --secondary-foreground: 0 0% 100%;
+    --tertiary: 320 100% 45%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%;
+    --accent: 180 40% 90%;
+    --accent-foreground: 180 100% 30%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --success: 142 76% 36%;
+    --success-foreground: 0 0% 100%;
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 180 100% 40%;
   }
 }
 
+/* ==========================================
+   STYLES DE BASE GLOBAUX
+   ==========================================
+*/
+
 @layer base {
+  /* Applique la couleur de bordure par défaut à tous les éléments */
   * {
     @apply border-border;
   }
 
+  /* Style du body - fond et texte par défaut */
   body {
     @apply bg-background text-foreground;
+    /* Police lissée pour un meilleur rendu */
+    font-feature-settings: "rlig" 1, "calt" 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Style de la scrollbar personnalisée (navigateurs Webkit) */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--background));
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--primary) / 0.3);
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--primary) / 0.5);
+  }
+}
+
+/* ==========================================
+   CLASSES UTILITAIRES PERSONNALISÉES
+   ==========================================
+*/
+
+@layer utilities {
+  /* ------------------------------------------
+     DÉGRADÉS
+     ------------------------------------------ */
+  
+  /* Dégradé principal Cyan -> Magenta */
+  .gradient-primary {
+    background: linear-gradient(
+      135deg,
+      hsl(var(--primary)) 0%,
+      hsl(var(--secondary)) 100%
+    );
+  }
+
+  /* Dégradé pour le texte */
+  .gradient-text {
+    background: linear-gradient(
+      135deg,
+      hsl(var(--primary)) 0%,
+      hsl(var(--secondary)) 50%,
+      hsl(var(--tertiary)) 100%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* ------------------------------------------
+     EFFETS DE LUEUR (GLOW)
+     ------------------------------------------ */
+  
+  /* Lueur cyan pour les éléments importants */
+  .glow-primary {
+    box-shadow: 
+      0 0 20px hsl(var(--primary) / 0.3),
+      0 0 40px hsl(var(--primary) / 0.2),
+      0 0 60px hsl(var(--primary) / 0.1);
+  }
+
+  /* Lueur au survol */
+  .glow-hover {
+    transition: box-shadow 0.3s ease;
+  }
+
+  .glow-hover:hover {
+    box-shadow: 
+      0 0 30px hsl(var(--primary) / 0.4),
+      0 0 60px hsl(var(--primary) / 0.2);
+  }
+
+  /* ------------------------------------------
+     BORDURES ANIMÉES
+     ------------------------------------------ */
+  
+  /* Bordure avec dégradé animé */
+  .border-gradient {
+    position: relative;
+    background: hsl(var(--card));
+    border-radius: var(--radius);
+  }
+
+  .border-gradient::before {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    border-radius: calc(var(--radius) + 2px);
+    background: linear-gradient(
+      45deg,
+      hsl(var(--primary)),
+      hsl(var(--secondary)),
+      hsl(var(--tertiary)),
+      hsl(var(--primary))
+    );
+    z-index: -1;
+    background-size: 400% 400%;
+    animation: gradient-rotate 8s ease infinite;
+  }
+
+  /* ------------------------------------------
+     FOND AVEC GRILLE (Style Cyberpunk)
+     ------------------------------------------ */
+  .bg-grid {
+    background-image: 
+      linear-gradient(hsl(var(--primary) / 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--primary) / 0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
+
+  /* ------------------------------------------
+     EFFET DE VERRE (GLASSMORPHISM)
+     ------------------------------------------ */
+  .glass {
+    background: hsl(var(--card) / 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid hsl(var(--border) / 0.5);
+  }
+}
+
+/* ==========================================
+   ANIMATIONS KEYFRAMES
+   ==========================================
+*/
+
+@keyframes gradient-rotate {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Animation de flottement pour les particules */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-20px) rotate(5deg);
+  }
+}
+
+/* Animation de pulsation pour les éléments importants */
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px hsl(var(--primary) / 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px hsl(var(--primary) / 0.6);
+  }
+}
+
+/* Animation d'apparition depuis le bas */
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Animation d'apparition avec scale */
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Animation de typing pour le hero */
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes blink-caret {
+  from, to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: hsl(var(--primary));
+  }
+}
+
+/* Animation des particules */
+@keyframes particle-float {
+  0% {
+    transform: translateY(100vh) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-10vh) rotate(720deg);
+    opacity: 0;
   }
 }
