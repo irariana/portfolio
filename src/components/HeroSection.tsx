@@ -1,71 +1,67 @@
 /* ==========================================
-   COMPOSANT HERO SECTION
+   COMPOSANT HERO SECTION - STYLE RPG RÉTRO
    ==========================================
    
    Section d'accueil principale du portfolio.
-   C'est la première chose que les visiteurs voient.
+   Design inspiré des écrans titre de jeux 8-bit/16-bit.
    
    Fonctionnalités :
-   - Animation de particules en arrière-plan
-   - Titre avec effet de dégradé
-   - Sous-titre avec animation de typing
-   - Boutons CTA (Call To Action)
-   - Badges animés montrant les centres d'intérêt
-   
-   Animations utilisées :
-   - Particules flottantes (CSS keyframes)
-   - Fade-in au chargement
-   - Hover effects sur les boutons
+   - Particules pixelisées en arrière-plan
+   - Titre avec effet néon
+   - Animation de typing style terminal
+   - Badges style items RPG
 */
 
 import { useEffect, useState } from "react";
-import { ChevronDown, Github, Linkedin, Mail, Gamepad2, Trophy, Tv } from "lucide-react";
+import { ChevronDown, Github, Linkedin, Mail, Gamepad2, Trophy, Tv, Sword, Shield, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { getProfile, type Profile } from "@/lib/dataManager";
 import { cn } from "@/lib/utils";
 
 // ==========================================
-// COMPOSANT PARTICULES (Animation de fond)
+// COMPOSANT PARTICULES PIXELISÉES
 // ==========================================
 
 /**
- * Crée des particules flottantes animées en arrière-plan
- * Donne un effet spatial/gaming au site
+ * Crée des particules pixelisées style 8-bit
+ * Ressemble à des étoiles/pixels qui flottent
  */
-function Particles() {
-  // Nombre de particules à générer
-  const particleCount = 50;
+function PixelParticles() {
+  const particleCount = 40;
 
-  // Génère un tableau de particules avec des propriétés aléatoires
   const particles = Array.from({ length: particleCount }, (_, i) => ({
     id: i,
-    // Position horizontale aléatoire (0-100%)
     left: `${Math.random() * 100}%`,
-    // Taille aléatoire (2-6px)
-    size: Math.random() * 4 + 2,
-    // Durée d'animation aléatoire (10-20s)
-    duration: Math.random() * 10 + 10,
-    // Délai de départ aléatoire (0-15s)
-    delay: Math.random() * 15,
-    // Opacité aléatoire (0.1-0.5)
-    opacity: Math.random() * 0.4 + 0.1,
+    // Tailles en multiples de 4 pour l'effet pixel
+    size: (Math.floor(Math.random() * 3) + 1) * 4,
+    duration: Math.random() * 15 + 10,
+    delay: Math.random() * 20,
+    opacity: Math.random() * 0.6 + 0.2,
+    // Couleur aléatoire (or, cyan ou magenta)
+    color: ['primary', 'secondary', 'tertiary'][Math.floor(Math.random() * 3)],
   }));
 
   return (
-    // Container des particules (couvre tout l'écran)
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
       {particles.map((particle) => (
         <div
           key={particle.id}
-          className="absolute rounded-full bg-primary"
+          className={cn(
+            "absolute",
+            particle.color === 'primary' && "bg-primary",
+            particle.color === 'secondary' && "bg-secondary",
+            particle.color === 'tertiary' && "bg-tertiary",
+          )}
           style={{
             left: particle.left,
             width: `${particle.size}px`,
             height: `${particle.size}px`,
             opacity: particle.opacity,
-            // Animation : monte du bas vers le haut
             animation: `particle-float ${particle.duration}s linear infinite`,
             animationDelay: `${particle.delay}s`,
+            // Pas de border-radius = pixel carré
+            borderRadius: 0,
+            boxShadow: `0 0 ${particle.size}px currentColor`,
           }}
         />
       ))}
@@ -78,53 +74,32 @@ function Particles() {
 // ==========================================
 
 export function HeroSection() {
-  // ------------------------------------------
-  // ÉTATS
-  // ------------------------------------------
-
-  // Stocke les données du profil
   const [profile, setProfile] = useState<Profile | null>(null);
-
-  // État pour l'animation du titre (effet machine à écrire)
   const [displayedTitle, setDisplayedTitle] = useState("");
   const [titleComplete, setTitleComplete] = useState(false);
 
-  // Titre complet à afficher
-  const fullTitle = "Data Science × Gaming × Sports × Animés";
-
-  // ------------------------------------------
-  // EFFET : Charger les données du profil
-  // ------------------------------------------
+  // Titre style RPG
+  const fullTitle = "DATA QUEST";
+  const subtitle = "Gaming × Sports × Animés × Data Science";
 
   useEffect(() => {
-    // Récupère le profil depuis le localStorage
     const data = getProfile();
     setProfile(data);
   }, []);
 
-  // ------------------------------------------
-  // EFFET : Animation de typing du titre
-  // ------------------------------------------
-
+  // Animation de typing
   useEffect(() => {
-    // Si le titre est déjà complet, ne rien faire
     if (displayedTitle.length >= fullTitle.length) {
       setTitleComplete(true);
       return;
     }
 
-    // Timer qui ajoute une lettre toutes les 80ms
     const timer = setTimeout(() => {
       setDisplayedTitle(fullTitle.slice(0, displayedTitle.length + 1));
-    }, 80);
+    }, 150); // Plus lent pour l'effet rétro
 
-    // Nettoie le timer si le composant est démonté
     return () => clearTimeout(timer);
   }, [displayedTitle]);
-
-  // ------------------------------------------
-  // FONCTION : Scroll vers une section
-  // ------------------------------------------
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -133,199 +108,197 @@ export function HeroSection() {
     }
   };
 
-  // ------------------------------------------
-  // RENDU JSX
-  // ------------------------------------------
-
   return (
     <section
       id="hero"
       className={cn(
-        // Hauteur plein écran
         "min-h-screen relative",
-        // Centrage du contenu
         "flex items-center justify-center",
-        // Grille en arrière-plan
-        "bg-grid",
-        // Overflow caché pour les particules
-        "overflow-hidden"
+        "bg-grid overflow-hidden"
       )}
     >
-      {/* ========================================
-          PARTICULES ANIMÉES (Arrière-plan)
-          ======================================== */}
-      <Particles />
+      {/* Particules pixelisées */}
+      <PixelParticles />
 
-      {/* ========================================
-          DÉGRADÉ DE FOND (Overlay)
-          ======================================== */}
-      <div
-        className={cn(
-          "absolute inset-0",
-          "bg-gradient-to-b from-background via-background/95 to-background"
-        )}
-      />
+      {/* Overlay scanlines */}
+      <div className="absolute inset-0 scanlines opacity-30" />
 
-      {/* ========================================
-          CONTENU PRINCIPAL
-          ======================================== */}
+      {/* Dégradé de fond */}
+      <div className="absolute inset-0 bg-gradient-to-b from-background via-background/90 to-background" />
+
+      {/* Contenu principal */}
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
-          {/* ------------------------------------------
-              BADGES DE PASSION (Gaming, Sports, Animés)
-              ------------------------------------------ */}
-          <div className="flex justify-center gap-4 mb-8 animate-fade-in">
-            {/* Badge Gaming */}
-            <div
-              className={cn(
-                "flex items-center gap-2 px-4 py-2",
-                "rounded-full glass",
-                "text-primary text-sm font-medium",
-                "animate-float"
-              )}
-              style={{ animationDelay: "0s" }}
-            >
-              <Gamepad2 className="w-4 h-4" />
-              Gaming
-            </div>
-
-            {/* Badge Sports */}
-            <div
-              className={cn(
-                "flex items-center gap-2 px-4 py-2",
-                "rounded-full glass",
-                "text-secondary text-sm font-medium",
-                "animate-float"
-              )}
-              style={{ animationDelay: "0.5s" }}
-            >
-              <Trophy className="w-4 h-4" />
-              Sports
-            </div>
-
-            {/* Badge Animés */}
-            <div
-              className={cn(
-                "flex items-center gap-2 px-4 py-2",
-                "rounded-full glass",
-                "text-tertiary text-sm font-medium",
-                "animate-float"
-              )}
-              style={{ animationDelay: "1s" }}
-            >
-              <Tv className="w-4 h-4" />
-              Animés
-            </div>
+          
+          {/* Badge "Press Start" */}
+          <div 
+            className={cn(
+              "inline-block mb-8 animate-arcade-blink",
+              "font-display text-pixel-sm",
+              "text-primary"
+            )}
+          >
+            ▶ PRESS START ◀
           </div>
 
-          {/* ------------------------------------------
-              TITRE PRINCIPAL (Effet typing)
-              ------------------------------------------ */}
+          {/* Titre principal style arcade */}
           <h1
             className={cn(
               "text-4xl sm:text-5xl md:text-6xl lg:text-7xl",
               "font-display font-bold",
-              "mb-6",
-              "gradient-text"
+              "mb-4",
+              "text-primary",
+              "animate-pulse-glow"
             )}
+            style={{
+              textShadow: `
+                0 0 10px hsl(var(--primary)),
+                0 0 20px hsl(var(--primary)),
+                0 0 40px hsl(var(--primary) / 0.5)
+              `
+            }}
           >
-            {/* Texte avec animation de typing */}
-            <span className="inline-block">
-              {displayedTitle}
-              {/* Curseur clignotant (disparaît quand le titre est complet) */}
-              {!titleComplete && (
-                <span className="inline-block w-[4px] h-[1em] bg-primary ml-1 animate-blink-caret" />
-              )}
-            </span>
+            {displayedTitle}
+            {!titleComplete && (
+              <span className="inline-block w-[0.5em] h-[1em] bg-primary ml-2 animate-blink-caret" />
+            )}
           </h1>
 
-          {/* ------------------------------------------
-              SOUS-TITRE (Titre professionnel)
-              ------------------------------------------ */}
+          {/* Sous-titre gradient */}
+          <p
+            className={cn(
+              "text-lg md:text-xl lg:text-2xl",
+              "font-sans",
+              "gradient-text",
+              "mb-8",
+              "animate-fade-in"
+            )}
+            style={{ animationDelay: "0.5s" }}
+          >
+            {subtitle}
+          </p>
+
+          {/* Badges style items RPG */}
+          <div className="flex flex-wrap justify-center gap-4 mb-10 animate-fade-in" style={{ animationDelay: "0.8s" }}>
+            {/* Badge Gaming */}
+            <div className={cn(
+              "flex items-center gap-2 px-4 py-2",
+              "rpg-box",
+              "text-primary font-sans text-lg"
+            )}>
+              <Gamepad2 className="w-5 h-5" />
+              <span>+10 Gaming</span>
+            </div>
+
+            {/* Badge Sports */}
+            <div className={cn(
+              "flex items-center gap-2 px-4 py-2",
+              "rpg-box",
+              "text-secondary font-sans text-lg"
+            )}>
+              <Trophy className="w-5 h-5" />
+              <span>+10 Sports</span>
+            </div>
+
+            {/* Badge Animés */}
+            <div className={cn(
+              "flex items-center gap-2 px-4 py-2",
+              "rpg-box",
+              "text-tertiary font-sans text-lg"
+            )}>
+              <Tv className="w-5 h-5" />
+              <span>+10 Animés</span>
+            </div>
+          </div>
+
+          {/* Titre professionnel */}
           <p
             className={cn(
               "text-xl md:text-2xl",
               "text-muted-foreground",
-              "mb-4",
+              "mb-3",
+              "font-sans",
               "animate-fade-in"
             )}
-            style={{ animationDelay: "0.3s" }}
+            style={{ animationDelay: "1s" }}
           >
             {profile?.title || "Étudiant BUT Science des Données"}
           </p>
 
-          {/* ------------------------------------------
-              DESCRIPTION / BIO COURTE
-              ------------------------------------------ */}
+          {/* Description */}
           <p
             className={cn(
               "text-lg",
               "text-muted-foreground/80",
               "max-w-2xl mx-auto",
-              "mb-8",
+              "mb-10",
+              "font-sans",
               "animate-fade-in"
             )}
-            style={{ animationDelay: "0.5s" }}
+            style={{ animationDelay: "1.2s" }}
           >
             Passionné par l'analyse de données, je cherche à appliquer la data
             science dans mes domaines de passion : l'e-sport, les statistiques
             sportives et les recommandations d'animés.
           </p>
 
-          {/* ------------------------------------------
-              BOUTONS CTA (Call To Action)
-              ------------------------------------------ */}
+          {/* Boutons CTA style RPG */}
           <div
             className="flex flex-wrap justify-center gap-4 mb-12 animate-fade-in"
-            style={{ animationDelay: "0.7s" }}
+            style={{ animationDelay: "1.4s" }}
           >
-            {/* Bouton principal : Voir les projets */}
+            {/* Bouton principal */}
             <Button
               size="lg"
               className={cn(
                 "gradient-primary text-primary-foreground",
-                "font-semibold",
-                "glow-hover",
-                "transition-all duration-300",
-                "hover:scale-105"
+                "font-display text-pixel-sm",
+                "px-8 py-6",
+                "border-2 border-primary-foreground/20",
+                "shadow-pixel hover:shadow-pixel-lg",
+                "transition-all duration-200",
+                "hover:translate-y-[-2px]"
               )}
               onClick={() => scrollToSection("projects")}
             >
-              Découvrir mes projets
+              <Sword className="w-4 h-4 mr-2" />
+              VOIR MES QUÊTES
             </Button>
 
-            {/* Bouton secondaire : Contact */}
+            {/* Bouton secondaire */}
             <Button
               size="lg"
               variant="outline"
               className={cn(
-                "border-primary/50 text-primary",
-                "hover:bg-primary/10",
-                "transition-all duration-300"
+                "border-2 border-secondary text-secondary",
+                "font-display text-pixel-sm",
+                "px-8 py-6",
+                "hover:bg-secondary/20",
+                "shadow-glow-secondary",
+                "transition-all duration-200"
               )}
               onClick={() => scrollToSection("contact")}
             >
-              Me contacter
+              <Shield className="w-4 h-4 mr-2" />
+              ME CONTACTER
             </Button>
           </div>
 
-          {/* ------------------------------------------
-              LIENS RÉSEAUX SOCIAUX
-              ------------------------------------------ */}
+          {/* Liens réseaux sociaux */}
           <div
             className="flex justify-center gap-6 animate-fade-in"
-            style={{ animationDelay: "0.9s" }}
+            style={{ animationDelay: "1.6s" }}
           >
-            {/* Lien GitHub */}
             {profile?.socials?.github && (
               <a
                 href={profile.socials.github}
                 target="_blank"
                 rel="noopener noreferrer"
                 className={cn(
+                  "p-3 rpg-box",
                   "text-muted-foreground hover:text-primary",
-                  "transition-all duration-300",
-                  "hover:scale-110"
+                  "transition-all duration-200",
+                  "hover:shadow-glow"
                 )}
                 aria-label="Voir mon profil GitHub"
               >
@@ -333,16 +306,16 @@ export function HeroSection() {
               </a>
             )}
 
-            {/* Lien LinkedIn */}
             {profile?.socials?.linkedin && (
               <a
                 href={profile.socials.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
                 className={cn(
-                  "text-muted-foreground hover:text-primary",
-                  "transition-all duration-300",
-                  "hover:scale-110"
+                  "p-3 rpg-box",
+                  "text-muted-foreground hover:text-secondary",
+                  "transition-all duration-200",
+                  "hover:shadow-glow-secondary"
                 )}
                 aria-label="Voir mon profil LinkedIn"
               >
@@ -350,14 +323,14 @@ export function HeroSection() {
               </a>
             )}
 
-            {/* Lien Email */}
             {profile?.socials?.email && (
               <a
                 href={`mailto:${profile.socials.email}`}
                 className={cn(
-                  "text-muted-foreground hover:text-primary",
-                  "transition-all duration-300",
-                  "hover:scale-110"
+                  "p-3 rpg-box",
+                  "text-muted-foreground hover:text-tertiary",
+                  "transition-all duration-200",
+                  "hover:shadow-glow-tertiary"
                 )}
                 aria-label="M'envoyer un email"
               >
@@ -368,18 +341,19 @@ export function HeroSection() {
         </div>
       </div>
 
-      {/* ========================================
-          INDICATEUR DE SCROLL (Flèche vers le bas)
-          ======================================== */}
+      {/* Indicateur de scroll */}
       <div
         className={cn(
           "absolute bottom-8 left-1/2 -translate-x-1/2",
-          "animate-bounce",
+          "animate-float",
           "cursor-pointer"
         )}
         onClick={() => scrollToSection("about")}
       >
-        <ChevronDown className="w-8 h-8 text-primary/60" />
+        <div className="flex flex-col items-center gap-2">
+          <span className="text-primary font-display text-pixel-xs">SCROLL</span>
+          <ChevronDown className="w-8 h-8 text-primary" />
+        </div>
       </div>
     </section>
   );

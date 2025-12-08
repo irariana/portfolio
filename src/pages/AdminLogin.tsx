@@ -48,14 +48,14 @@ export default function AdminLogin() {
           Retour au site
         </Link>
 
-        {/* Carte de connexion */}
-        <div className="p-8 rounded-xl glass animate-scale-in">
+        {/* Carte de connexion style RPG */}
+        <div className="rpg-box p-8 animate-scale-in">
           <div className="text-center mb-8">
-            <div className="w-16 h-16 rounded-full gradient-primary mx-auto flex items-center justify-center mb-4">
+            <div className="w-16 h-16 mx-auto flex items-center justify-center mb-4 bg-primary border-4 border-primary-foreground/30">
               <Lock className="w-8 h-8 text-primary-foreground" />
             </div>
-            <h1 className="text-2xl font-display font-bold gradient-text">Connexion Admin</h1>
-            <p className="text-muted-foreground text-sm mt-2">Mot de passe par défaut : admin123</p>
+            <h1 className="font-display text-pixel-lg text-primary">ADMIN LOGIN</h1>
+            <p className="text-muted-foreground font-sans text-lg mt-2">Entrez le mot de passe pour continuer</p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-6">
