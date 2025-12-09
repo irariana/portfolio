@@ -9,7 +9,7 @@ import { componentTagger } from "lovable-tagger";
 // Si tu utilises un domaine custom, laisse "/" 
 export default defineConfig(({ mode }) => ({
   // Base path pour GitHub Pages - à modifier avec le nom de ton repo
-  base: mode === "production" ? "/" : "/",
+  base: mode === "production" ? "/" : "/portfolio-intern",
   server: {
     host: "::",
     port: 8080,
