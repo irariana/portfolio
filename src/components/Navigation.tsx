@@ -83,7 +83,7 @@ export function Navigation() {
         )}
       >
         <div className="container mx-auto px-4 flex items-center justify-between">
-          
+
           {/* Logo style RPG */}
           <Link
             to="/"
@@ -99,7 +99,7 @@ export function Navigation() {
             )}>
               <Sword className="w-5 h-5" />
             </div>
-            
+
             {/* Texte du logo */}
             <div className="flex flex-col">
               <span className="font-display text-pixel-sm text-primary leading-none">
@@ -133,20 +133,23 @@ export function Navigation() {
             ))}
 
             {/* Lien Admin */}
-            <Link
-              to="/admin"
-              className={cn(
-                "ml-4 px-4 py-2",
-                "font-display text-pixel-xs",
-                "text-accent hover:text-accent-foreground",
-                "bg-accent/20 hover:bg-accent/40",
-                "border-2 border-accent/50",
-                "transition-all duration-200"
-              )}
-            >
-              <Star className="w-4 h-4 inline mr-1" />
-              ADMIN
-            </Link>
+            {/* Lien Admin - Visible uniquement en DEV */}
+            {import.meta.env.DEV && (
+              <Link
+                to="/admin"
+                className={cn(
+                  "ml-4 px-4 py-2",
+                  "font-display text-pixel-xs",
+                  "text-accent hover:text-accent-foreground",
+                  "bg-accent/20 hover:bg-accent/40",
+                  "border-2 border-accent/50",
+                  "transition-all duration-200"
+                )}
+              >
+                <Star className="w-4 h-4 inline mr-1" />
+                ADMIN
+              </Link>
+            )}
           </div>
 
           {/* Bouton menu mobile */}
@@ -194,10 +197,10 @@ export function Navigation() {
                 <X className="w-6 h-6" />
               </Button>
             </div>
-            
+
             {/* Séparateur pixel */}
             <div className="h-1 bg-primary/30 mb-4" />
-            
+
             {/* Liste des liens */}
             <div className="space-y-2">
               {navLinks.map((link, index) => (
@@ -223,22 +226,25 @@ export function Navigation() {
               ))}
 
               {/* Lien Admin dans le menu mobile */}
-              <Link
-                to="/admin"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className={cn(
-                  "flex items-center gap-3 p-3 mt-4",
-                  "font-display text-pixel-sm",
-                  "text-accent",
-                  "bg-accent/20",
-                  "border-2 border-accent/50",
-                  "animate-slide-up"
-                )}
-                style={{ animationDelay: `${navLinks.length * 80}ms` }}
-              >
-                <Star className="w-5 h-5" />
-                <span>ADMIN PANEL</span>
-              </Link>
+              {/* Lien Admin dans le menu mobile - Visible uniquement en DEV */}
+              {import.meta.env.DEV && (
+                <Link
+                  to="/admin"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className={cn(
+                    "flex items-center gap-3 p-3 mt-4",
+                    "font-display text-pixel-sm",
+                    "text-accent",
+                    "bg-accent/20",
+                    "border-2 border-accent/50",
+                    "animate-slide-up"
+                  )}
+                  style={{ animationDelay: `${navLinks.length * 80}ms` }}
+                >
+                  <Star className="w-5 h-5" />
+                  <span>ADMIN PANEL</span>
+                </Link>
+              )}
             </div>
           </div>
         </div>

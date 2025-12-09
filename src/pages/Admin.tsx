@@ -43,7 +43,7 @@ function ImageUpload({ currentImage, onImageChange, label }: ImageUploadProps) {
     try {
       // Utilise uploadImage qui valide et compresse automatiquement
       const result = await uploadImage(file, 800);
-      
+
       if (!result.success) {
         toast({
           title: "Erreur",
@@ -78,7 +78,7 @@ function ImageUpload({ currentImage, onImageChange, label }: ImageUploadProps) {
             <Image className="w-8 h-8 text-muted-foreground" />
           )}
         </div>
-        
+
         {/* Boutons */}
         <div className="flex flex-col gap-2">
           <Button
@@ -101,7 +101,7 @@ function ImageUpload({ currentImage, onImageChange, label }: ImageUploadProps) {
             </Button>
           )}
         </div>
-        
+
         <input
           ref={fileInputRef}
           type="file"
@@ -178,7 +178,7 @@ function PasswordChangeForm() {
           />
         </div>
       </div>
-      
+
       <div className="space-y-2">
         <Label>Nouveau mot de passe</Label>
         <Input
@@ -188,7 +188,7 @@ function PasswordChangeForm() {
           required
         />
       </div>
-      
+
       <div className="space-y-2">
         <Label>Confirmer le nouveau mot de passe</Label>
         <Input
@@ -284,7 +284,7 @@ export default function Admin() {
   return (
     <div className="min-h-screen bg-background">
       {/* Header RPG */}
-      <header className="sticky top-0 z-50 rpg-box border-b border-border/50 rounded-none">
+      <header className="sticky top-0 z-50 rpg-box border-b border-border/50 rounded-none mb-6">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center gap-4">
             <h1 className="text-xl font-display font-bold">
@@ -295,6 +295,17 @@ export default function Admin() {
             </Link>
           </div>
           <div className="flex items-center gap-2">
+            {import.meta.env.DEV ? (
+              <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-green-500/10 text-green-500 text-xs font-bold border border-green-500/20">
+                <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                Mode Éditeur (PC)
+              </span>
+            ) : (
+              <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-red-500/10 text-red-500 text-xs font-bold border border-red-500/20">
+                <Lock className="w-3 h-3" />
+                Lecture Seule
+              </span>
+            )}
             <Button variant="outline" size="sm" onClick={handleExport} className="font-pixel text-xs">
               <Download className="w-4 h-4 mr-1" /> Export
             </Button>
@@ -310,6 +321,23 @@ export default function Admin() {
           </div>
         </div>
       </header>
+
+      {import.meta.env.PROD && (
+        <div className="container mx-auto px-4 mb-6">
+          <div className="bg-destructive/10 border border-destructive/20 p-4 rounded-lg flex items-center gap-3 text-destructive">
+            <div className="p-2 bg-destructive/20 rounded-full">
+              <Lock className="w-5 h-5" />
+            </div>
+            <div>
+              <h3 className="font-bold">Modifications impossibles depuis ce lien</h3>
+              <p className="text-sm opacity-90">
+                Vous êtes sur la version publique du site (GitHub Pages).
+                Pour modifier le contenu et sauvegarder, vous devez utiliser <strong>votre site local sur votre ordinateur</strong>.
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Contenu */}
       <main className="container mx-auto px-4 py-8">
@@ -336,7 +364,7 @@ export default function Admin() {
                 }}
                 label="Avatar du Héros"
               />
-              
+
               <div><Label>Nom</Label><Input value={profile.name} onChange={(e) => setProfile({ ...profile, name: e.target.value })} /></div>
               <div><Label>Titre / Classe</Label><Input value={profile.title} onChange={(e) => setProfile({ ...profile, title: e.target.value })} /></div>
               <div><Label>Biographie</Label><Textarea value={profile.bio} onChange={(e) => setProfile({ ...profile, bio: e.target.value })} /></div>
@@ -443,12 +471,12 @@ export default function Admin() {
             ) : (
               <div className="grid gap-4">
                 {messages.map((msg) => (
-                  <div 
-                    key={msg.id} 
+                  <div
+                    key={msg.id}
                     className={cn(
                       "p-4 rounded-lg cursor-pointer transition-colors",
                       msg.read ? "bg-muted/20" : "bg-primary/10 border border-primary/30"
-                    )} 
+                    )}
                     onClick={() => { markMessageAsRead(msg.id); loadData(); }}
                   >
                     <div className="flex justify-between items-start">
