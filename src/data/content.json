@@ -78,21 +78,6 @@
   ],
   "projects": [
     {
-      "id": "project-3",
-      "title": "Recommandation Animés",
-      "description": "Système de recommandation d'animés basé sur le filtrage collaboratif. Analyse des préférences utilisateurs pour suggérer de nouveaux contenus.",
-      "image": "",
-      "technologies": [
-        "Python",
-        "Surprise",
-        "Flask",
-        "React"
-      ],
-      "githubUrl": "https://github.com",
-      "demoUrl": "",
-      "featured": true
-    },
-    {
       "id": "project-4",
       "title": "Dashboard Gaming Stats",
       "description": "Dashboard interactif affichant les statistiques de jeu personnelles avec graphiques temps réel et analyses de performance.",
