@@ -176,8 +176,8 @@ export function saveData(data: PortfolioData): void {
     // 3. Sauvegarde sur le disque (Serveur local) + Commit Git
     if (import.meta.env.DEV) {
       console.log("💾 Tentative de sauvegarde sur le disque...");
-      // On utilise le chemin complet /portfolio/api/... pour correspondre à la config Vite
-      fetch("/portfolio/api/save-content", {
+      // Retour à la racine API pour éviter les conflits de base path
+      fetch("/api/save-content", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

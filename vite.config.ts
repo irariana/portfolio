@@ -32,10 +32,11 @@ export default defineConfig(({ mode }) => ({
   },
   // Middleware pour sauvegarder le contenu en mode développement
   configureServer(server: any) {
-    server.middlewares.use(async (req: any, res: any, next: any) => {
-      // On capture n'importe quelle requête qui finit par /api/save-content
-      if (req.method === "POST" && req.url?.includes("/api/save-content")) {
-        console.log(`📡 Requête de sauvegarde reçue sur : ${req.url}`);
+    // Écoute stricte sur /api/save-content (racine du serveur local)
+    // Note: Cela interceptera localhost:8080/api/save-content même si le site est sur /portfolio/
+    server.middlewares.use("/api/save-content", async (req: any, res: any, next: any) => {
+      if (req.method === "POST") {
+        console.log("📡 Sauvegarde reçue sur /api/save-content !");
 
         const chunks: Uint8Array[] = [];
         req.on("data", (chunk: any) => chunks.push(chunk));
@@ -46,17 +47,17 @@ export default defineConfig(({ mode }) => ({
           const filePath = path.resolve(process.cwd(), "src/data/content.json");
 
           try {
-            console.log("📝 Écriture du fichier...");
+            console.log("📝 Écriture du fichier content.json...");
             const formattedJson = JSON.stringify(JSON.parse(body), null, 2);
             fs.writeFileSync(filePath, formattedJson, "utf-8");
 
-            console.log("🚀 Lancement Git...");
+            console.log("🚀 Lancement Git Auto-Commit...");
             exec(
               'git add . && git commit -m "auto: Mise à jour du contenu via Admin" && git pull --rebase && git push',
               (error, stdout, stderr) => {
                 if (error) {
                   if (stdout && stdout.includes("nothing to commit")) {
-                    console.log("Changes : Rien à commiter.");
+                    console.log("ℹ️ Rien à commiter.");
                     return;
                   }
                   console.error(`❌ Erreur Git: ${error.message}`);
@@ -74,10 +75,9 @@ export default defineConfig(({ mode }) => ({
             res.end("Error saving file");
           }
         });
-        return; // On arrête là, on ne passe pas à next()
+      } else {
+        next();
       }
-
-      next();
     });
   },
 }));
