@@ -32,54 +32,52 @@ export default defineConfig(({ mode }) => ({
   },
   // Middleware pour sauvegarder le contenu en mode développement
   configureServer(server: any) {
-    // On ajoute le base path "/portfolio/" pour correspondre à l'URL de fetch
-    server.middlewares.use("/portfolio/api/save-content", async (req: any, res: any, next: any) => {
-      if (req.method === "POST") {
+    server.middlewares.use(async (req: any, res: any, next: any) => {
+      // On capture n'importe quelle requête qui finit par /api/save-content
+      if (req.method === "POST" && req.url?.includes("/api/save-content")) {
+        console.log(`📡 Requête de sauvegarde reçue sur : ${req.url}`);
+
         const chunks: Uint8Array[] = [];
         req.on("data", (chunk: any) => chunks.push(chunk));
+
         req.on("end", () => {
           const body = Buffer.concat(chunks).toString();
           const fs = require("fs");
-          // Utilisation de process.cwd() car __dirname n'est pas dispo en ESM (type: module)
           const filePath = path.resolve(process.cwd(), "src/data/content.json");
 
           try {
-            // Formatte le JSON pour qu'il soit lisible
+            console.log("📝 Écriture du fichier...");
             const formattedJson = JSON.stringify(JSON.parse(body), null, 2);
             fs.writeFileSync(filePath, formattedJson, "utf-8");
 
-            // AUTOMATISATION GIT : Commit & Push
-            console.log("Sauvegarde locale effectuée. Lancement du push GitHub...");
+            console.log("🚀 Lancement Git...");
             exec(
               'git add . && git commit -m "auto: Mise à jour du contenu via Admin" && git pull --rebase && git push',
               (error, stdout, stderr) => {
                 if (error) {
-                  // Si l'erreur est juste "rien à commiter", ce n'est pas grave
-                  // Note: git commit retourne exit code 1 si rien à commiter
                   if (stdout && stdout.includes("nothing to commit")) {
-                    console.log("Rien à commiter.");
+                    console.log("Changes : Rien à commiter.");
                     return;
                   }
-                  console.error(`Erreur Git Auto-Push: ${error.message}`);
-                  console.error(`Stdout: ${stdout}`);
-                  console.error(`Stderr: ${stderr}`);
+                  console.error(`❌ Erreur Git: ${error.message}`);
                   return;
                 }
-                console.log(`Git Auto-Push Succès: ${stdout}`);
+                console.log(`✅ Git Succès: ${stdout}`);
               }
             );
 
             res.statusCode = 200;
             res.end("Saved & Pushed");
-          } catch (e) {
-            console.error(e);
+          } catch (e: any) {
+            console.error("❌ Erreur écriture:", e);
             res.statusCode = 500;
             res.end("Error saving file");
           }
         });
-      } else {
-        next();
+        return; // On arrête là, on ne passe pas à next()
       }
+
+      next();
     });
   },
 }));
