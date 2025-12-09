@@ -76,16 +76,7 @@
       "icon": "pie-chart"
     }
   ],
-  "projects": [
-    {
-      "title": "Enqê",
-      "description": "",
-      "image": "",
-      "technologies": [],
-      "featured": false,
-      "id": "1765314687575-qxy100d8s"
-    }
-  ],
+  "projects": [],
   "articles": [
     {
       "id": "article-1",
