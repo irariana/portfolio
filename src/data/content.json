@@ -78,21 +78,6 @@
   ],
   "projects": [
     {
-      "id": "project-1",
-      "title": "Analyse E-Sport LoL",
-      "description": "Analyse statistique des performances des joueurs professionnels de League of Legends. Visualisation des KDA, winrates et méta-analyse des champions.",
-      "image": "",
-      "technologies": [
-        "Python",
-        "Pandas",
-        "Matplotlib",
-        "Riot API"
-      ],
-      "githubUrl": "https://github.com",
-      "demoUrl": "",
-      "featured": true
-    },
-    {
       "id": "project-2",
       "title": "Prédiction Football",
       "description": "Modèle de machine learning pour prédire les résultats de matchs de football en utilisant les statistiques historiques des équipes.",
