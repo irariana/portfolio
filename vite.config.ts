@@ -32,7 +32,8 @@ export default defineConfig(({ mode }) => ({
   },
   // Middleware pour sauvegarder le contenu en mode développement
   configureServer(server: any) {
-    server.middlewares.use("/api/save-content", async (req: any, res: any, next: any) => {
+    // On ajoute le base path "/portfolio/" pour correspondre à l'URL de fetch
+    server.middlewares.use("/portfolio/api/save-content", async (req: any, res: any, next: any) => {
       if (req.method === "POST") {
         const chunks: Uint8Array[] = [];
         req.on("data", (chunk: any) => chunks.push(chunk));
