@@ -39,7 +39,8 @@ export default defineConfig(({ mode }) => ({
         req.on("end", () => {
           const body = Buffer.concat(chunks).toString();
           const fs = require("fs");
-          const filePath = path.resolve(__dirname, "./src/data/content.json");
+          // Utilisation de process.cwd() car __dirname n'est pas dispo en ESM (type: module)
+          const filePath = path.resolve(process.cwd(), "src/data/content.json");
 
           try {
             // Formatte le JSON pour qu'il soit lisible
