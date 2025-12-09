@@ -173,11 +173,11 @@ export function saveData(data: PortfolioData): void {
     // 2. Sauvegarde dans le localStorage (cache immédiat)
     localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
 
-    // 3. Sauvegarde sur le disque (Serveur local) + Commit Git
+    // 3. Sauvegarde sur le disque (Serveur dédié) + Commit Git
     if (import.meta.env.DEV) {
-      console.log("💾 Tentative de sauvegarde sur le disque...");
-      // Retour à la racine API pour éviter les conflits de base path
-      fetch("/api/save-content", {
+      console.log("💾 Appel au serveur de sauvegarde dédié (Port 3001)...");
+      // On tape sur le serveur node indépendant pour éviter les soucis de proxy Vite
+      fetch("http://localhost:3001/api/save", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
