@@ -1,73 +1,91 @@
-# Welcome to your Lovable project
+# Portfolio Data Science - Style RPG 🎮
 
-## Project info
+Portfolio personnel avec un design inspiré des jeux vidéo rétro.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+## 🚀 Déploiement sur GitHub Pages
 
-## How can I edit this code?
+### Option 1 : Déploiement automatique (recommandé)
 
-There are several ways of editing your application.
+1. **Connecter à GitHub** depuis Lovable (bouton GitHub en haut)
+2. **Créer le repository** sur ton compte GitHub
+3. Aller dans **Settings > Pages** de ton repo GitHub
+4. Source : sélectionner **GitHub Actions**
+5. C'est tout ! Le site se déploie automatiquement à chaque push.
 
-**Use Lovable**
+### Option 2 : Déploiement manuel
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+```bash
+# Cloner le repo
+git clone https://github.com/TON-USERNAME/TON-REPO.git
+cd TON-REPO
 
-Changes made via Lovable will be committed automatically to this repo.
+# Installer les dépendances
+npm install
 
-**Use your preferred IDE**
+# Build pour production
+npm run build
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+# Le dossier dist/ contient les fichiers à déployer
 ```
 
-**Edit a file directly in GitHub**
+## ⚙️ Configuration
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+### Base Path (si nécessaire)
 
-**Use GitHub Codespaces**
+Si ton site n'est PAS à la racine (ex: `username.github.io/mon-portfolio`), modifie `vite.config.ts` :
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+```typescript
+base: mode === "production" ? "/mon-portfolio/" : "/",
+```
 
-## What technologies are used for this project?
+### EmailJS (optionnel)
 
-This project is built with:
+Pour recevoir les messages du formulaire de contact par email :
 
+1. Créer un compte sur [emailjs.com](https://www.emailjs.com/)
+2. Créer un service email et un template
+3. Ajouter ces variables d'environnement :
+   - `VITE_EMAILJS_SERVICE_ID`
+   - `VITE_EMAILJS_TEMPLATE_ID`
+   - `VITE_EMAILJS_PUBLIC_KEY`
+
+## 🔐 Panneau Admin
+
+- URL : `/admin`
+- Mot de passe par défaut : `admin`
+- **Change le mot de passe** dès la première connexion !
+
+## 📁 Structure du projet
+
+```
+src/
+├── components/     # Composants React
+│   ├── ui/        # Composants shadcn/ui
+│   └── ...        # Sections du portfolio
+├── lib/           # Utilitaires et services
+│   ├── dataManager.ts   # Gestion des données (localStorage)
+│   ├── authManager.ts   # Authentification admin
+│   ├── emailService.ts  # Service EmailJS
+│   └── imageManager.ts  # Upload d'images
+├── pages/         # Pages de l'application
+└── index.css      # Styles globaux et thème
+```
+
+## 🎨 Personnalisation
+
+- **Thème** : Modifier `src/index.css` et `tailwind.config.ts`
+- **Données** : Via le panneau admin ou directement dans `src/lib/dataManager.ts`
+- **Polices** : Press Start 2P (pixel) et VT323 (retro)
+
+## 📝 Technologies
+
+- React + TypeScript
 - Vite
-- TypeScript
-- React
-- shadcn-ui
 - Tailwind CSS
+- shadcn/ui
+- React Router
+- EmailJS (optionnel)
 
-## How can I deploy this project?
+---
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+Créé avec ❤️ et Lovable
