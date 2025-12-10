@@ -10,7 +10,7 @@
 
 import { useEffect, useState, useRef } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { Home, User, Wrench, FolderGit2, Mail, LogOut, Plus, Trash2, Save, Download, Upload, Key, Image, Eye, EyeOff } from "lucide-react";
+import { Home, User, Wrench, FolderGit2, Mail, LogOut, Plus, Trash2, Save, Download, Upload, Key, Image, Eye, EyeOff, Lock, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";

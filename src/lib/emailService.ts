@@ -29,16 +29,16 @@ import emailjs from "@emailjs/browser";
 // ==========================================
 
 // Ces valeurs sont récupérées depuis les secrets Lovable
-// ou tu peux les mettre directement ici si tu préfères
+// Les secrets DOIVENT commencer par VITE_ pour être accessibles côté client
 const EMAILJS_CONFIG = {
   // ID de ton service email (ex: "service_abc123")
-  serviceId: import.meta.env.VITE_EMAILJS_SERVICE_ID || "YOUR_SERVICE_ID",
+  serviceId: import.meta.env.VITE_EMAILJS_SERVICE_ID || "",
   
   // ID de ton template (ex: "template_xyz789")
-  templateId: import.meta.env.VITE_EMAILJS_TEMPLATE_ID || "YOUR_TEMPLATE_ID",
+  templateId: import.meta.env.VITE_EMAILJS_TEMPLATE_ID || "",
   
   // Ta clé publique EmailJS (ex: "user_ABCdef123")
-  publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY || "YOUR_PUBLIC_KEY",
+  publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY || "",
 };
 
 // ==========================================
@@ -72,7 +72,7 @@ export interface EmailResult {
  * À appeler une fois au démarrage de l'application
  */
 export function initEmailJS(): void {
-  if (EMAILJS_CONFIG.publicKey !== "YOUR_PUBLIC_KEY") {
+  if (EMAILJS_CONFIG.publicKey) {
     emailjs.init(EMAILJS_CONFIG.publicKey);
     console.log("📧 [EMAIL] EmailJS initialisé avec succès !");
   } else {
@@ -97,9 +97,7 @@ export async function sendContactEmail(
   console.log("📧 [EMAIL] Envoi de l'email en cours...");
   
   // Vérifie que EmailJS est configuré
-  if (EMAILJS_CONFIG.publicKey === "YOUR_PUBLIC_KEY" ||
-      EMAILJS_CONFIG.serviceId === "YOUR_SERVICE_ID" ||
-      EMAILJS_CONFIG.templateId === "YOUR_TEMPLATE_ID") {
+  if (!EMAILJS_CONFIG.publicKey || !EMAILJS_CONFIG.serviceId || !EMAILJS_CONFIG.templateId) {
     console.log("⚠️ [EMAIL] EmailJS n'est pas configuré");
     return {
       success: false,
@@ -148,9 +146,9 @@ export async function sendContactEmail(
  * @returns true si tous les IDs sont configurés
  */
 export function isEmailJSConfigured(): boolean {
-  return (
-    EMAILJS_CONFIG.publicKey !== "YOUR_PUBLIC_KEY" &&
-    EMAILJS_CONFIG.serviceId !== "YOUR_SERVICE_ID" &&
-    EMAILJS_CONFIG.templateId !== "YOUR_TEMPLATE_ID"
+  return Boolean(
+    EMAILJS_CONFIG.publicKey && 
+    EMAILJS_CONFIG.serviceId && 
+    EMAILJS_CONFIG.templateId
   );
 }
