@@ -17,7 +17,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { isAuthenticated, logout, changePassword } from "@/lib/authManager";
-import { getProfile, updateProfile, getSkills, addSkill, updateSkill, deleteSkill, getProjects, addProject, updateProject, deleteProject, getMessages, deleteMessage, markMessageAsRead, exportData, importData, type Profile, type Skill, type Project, type ContactMessage } from "@/lib/dataManager";
+import { getProfile, updateProfile, getSkills, addSkill, updateSkill, deleteSkill, getProjects, addProject, updateProject, deleteProject, getMessages, deleteMessage, markMessageAsRead, exportData, importData, getTimeline, addTimelineItem, updateTimelineItem, deleteTimelineItem, type Profile, type Skill, type Project, type ContactMessage, type TimelineItem } from "@/lib/dataManager";
 import { uploadImage, type ImageUploadResult } from "@/lib/imageManager";
 import { useToast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
@@ -230,6 +230,7 @@ export default function Admin() {
   const [skills, setSkills] = useState<Skill[]>([]);
   const [projects, setProjects] = useState<Project[]>([]);
   const [messages, setMessages] = useState<ContactMessage[]>([]);
+  const [timeline, setTimeline] = useState<TimelineItem[]>([]);
 
   // Vérification de l'authentification
   useEffect(() => {
@@ -245,6 +246,7 @@ export default function Admin() {
     setSkills(getSkills());
     setProjects(getProjects());
     setMessages(getMessages());
+    setTimeline(getTimeline());
   };
 
   const handleLogout = () => {
@@ -342,8 +344,9 @@ export default function Admin() {
       {/* Contenu */}
       <main className="container mx-auto px-4 py-8">
         <Tabs defaultValue="profile" className="space-y-6">
-          <TabsList className="rpg-box p-1">
+          <TabsList className="rpg-box p-1 flex-wrap">
             <TabsTrigger value="profile" className="font-pixel text-xs"><User className="w-4 h-4 mr-1" /> Profil</TabsTrigger>
+            <TabsTrigger value="timeline" className="font-pixel text-xs"><Calendar className="w-4 h-4 mr-1" /> Timeline ({timeline.length})</TabsTrigger>
             <TabsTrigger value="skills" className="font-pixel text-xs"><Wrench className="w-4 h-4 mr-1" /> Skills ({skills.length})</TabsTrigger>
             <TabsTrigger value="projects" className="font-pixel text-xs"><FolderGit2 className="w-4 h-4 mr-1" /> Quêtes ({projects.length})</TabsTrigger>
             <TabsTrigger value="messages" className="font-pixel text-xs"><Mail className="w-4 h-4 mr-1" /> Messages ({messages.filter(m => !m.read).length})</TabsTrigger>
@@ -374,6 +377,36 @@ export default function Admin() {
               <Button onClick={() => { updateProfile(profile); toast({ title: "Profil sauvegardé !" }); }}>
                 <Save className="w-4 h-4 mr-1" /> Sauvegarder
               </Button>
+            </div>
+          </TabsContent>
+
+          {/* Onglet Timeline (Historique des quêtes) */}
+          <TabsContent value="timeline" className="p-6 rounded-xl rpg-box">
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-xl font-bold neon-text">Historique des Quêtes</h2>
+              <Button size="sm" onClick={() => { addTimelineItem({ year: "2024", title: "Nouvel événement", description: "Description..." }); loadData(); }}>
+                <Plus className="w-4 h-4 mr-1" /> Ajouter
+              </Button>
+            </div>
+            <div className="grid gap-4">
+              {timeline.map((item) => (
+                <div key={item.id} className="p-4 rounded-lg bg-muted/30 border border-border/50 space-y-3">
+                  <div className="flex items-center gap-4">
+                    <Input value={item.year} placeholder="Année" onChange={(e) => { updateTimelineItem(item.id, { year: e.target.value }); loadData(); }} className="w-24" />
+                    <Input value={item.title} placeholder="Titre" onChange={(e) => { updateTimelineItem(item.id, { title: e.target.value }); loadData(); }} className="flex-1" />
+                    <Button variant="destructive" size="icon" onClick={() => { deleteTimelineItem(item.id); loadData(); }}><Trash2 className="w-4 h-4" /></Button>
+                  </div>
+                  <Textarea 
+                    value={item.description} 
+                    placeholder="Description de l'événement..." 
+                    onChange={(e) => { updateTimelineItem(item.id, { description: e.target.value }); loadData(); }} 
+                    className="min-h-[60px]"
+                  />
+                </div>
+              ))}
+              {timeline.length === 0 && (
+                <p className="text-muted-foreground text-center py-8">Aucun événement dans l'historique.</p>
+              )}
             </div>
           </TabsContent>
 

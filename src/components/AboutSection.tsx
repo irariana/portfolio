@@ -1,28 +1,24 @@
 /* ==========================================
    COMPOSANT ABOUT SECTION - STYLE RPG
    ==========================================
+   
+   Affiche le profil du héros avec ses stats et
+   son historique des quêtes (timeline éditable).
 */
 
 import { useEffect, useState } from "react";
-import {
-  User, GraduationCap, Lightbulb, Sparkles, Rocket, Heart,
-  Gamepad2, Trophy, Tv, Code, Calendar, Shield, Sword, Star,
-} from "lucide-react";
-import { getProfile, type Profile } from "@/lib/dataManager";
+import { User, Calendar, Shield, Star, Gamepad2, Trophy, Tv, Code } from "lucide-react";
+import { getProfile, getTimeline, type Profile, type TimelineItem } from "@/lib/dataManager";
 import { cn } from "@/lib/utils";
 
-const timelineData = [
-  { year: "2024", title: "BUT Science des Données - 2ème année", description: "Approfondissement en Machine Learning, statistiques avancées.", icon: GraduationCap },
-  { year: "2023", title: "BUT Science des Données - 1ère année", description: "Fondamentaux Python, SQL, introduction aux statistiques.", icon: Code },
-  { year: "2022", title: "Baccalauréat", description: "Obtention du bac avec spécialités mathématiques et NSI.", icon: GraduationCap },
-];
-
+// Stats RPG du personnage
 const stats = [
   { label: "HP", value: 100, max: 100, color: "bg-success" },
   { label: "MP", value: 85, max: 100, color: "bg-secondary" },
   { label: "XP", value: 7500, max: 10000, color: "bg-primary" },
 ];
 
+// Passions/équipements
 const interests = [
   { icon: Gamepad2, name: "Jeux Vidéo", color: "text-primary", stat: "+15 INT" },
   { icon: Trophy, name: "E-Sport", color: "text-secondary", stat: "+10 DEX" },
@@ -32,9 +28,11 @@ const interests = [
 
 export function AboutSection() {
   const [profile, setProfile] = useState<Profile | null>(null);
+  const [timeline, setTimeline] = useState<TimelineItem[]>([]);
 
   useEffect(() => {
     setProfile(getProfile());
+    setTimeline(getTimeline());
   }, []);
 
   return (
@@ -106,7 +104,7 @@ export function AboutSection() {
               {/* Bio */}
               <div className="mt-6 pt-4 border-t-2 border-primary/30">
                 <p className="text-muted-foreground font-sans text-lg leading-relaxed">
-                  {profile?.bio || "Passionné par la Data Science, les jeux vidéo et les animés. Je cherche à appliquer l'analyse de données dans mes domaines de passion."}
+                  {profile?.bio || "Passionné par la Data Science, les jeux vidéo et les animés."}
                 </p>
               </div>
             </div>
@@ -135,7 +133,7 @@ export function AboutSection() {
             </div>
           </div>
 
-          {/* Colonne droite : Timeline */}
+          {/* Colonne droite : Timeline dynamique */}
           <div className="rpg-box p-6">
             <h3 className="font-display text-pixel-sm text-primary mb-6 flex items-center gap-2">
               <Calendar className="w-4 h-4" />
@@ -143,24 +141,30 @@ export function AboutSection() {
             </h3>
 
             <div className="space-y-6">
-              {timelineData.map((item, index) => (
-                <div key={item.year} className={cn(
-                  "relative pl-8",
-                  "before:absolute before:left-0 before:top-0 before:bottom-0",
-                  "before:w-1 before:bg-primary/30",
-                  index === timelineData.length - 1 && "before:hidden"
-                )}>
-                  <div className={cn(
-                    "absolute left-0 -translate-x-1/2",
-                    "w-4 h-4 bg-primary border-2 border-background"
-                  )} />
-                  <div className="p-4 bg-muted/30 border-2 border-border">
-                    <span className="font-display text-pixel-xs text-primary">{item.year}</span>
-                    <h4 className="font-sans text-lg text-foreground mt-1">{item.title}</h4>
-                    <p className="text-sm text-muted-foreground mt-2">{item.description}</p>
+              {timeline.length === 0 ? (
+                <p className="text-muted-foreground text-center py-8">
+                  Aucune quête dans l'historique. Ajoutez-en via l'admin !
+                </p>
+              ) : (
+                timeline.map((item, index) => (
+                  <div key={item.id} className={cn(
+                    "relative pl-8",
+                    "before:absolute before:left-0 before:top-0 before:bottom-0",
+                    "before:w-1 before:bg-primary/30",
+                    index === timeline.length - 1 && "before:hidden"
+                  )}>
+                    <div className={cn(
+                      "absolute left-0 -translate-x-1/2",
+                      "w-4 h-4 bg-primary border-2 border-background"
+                    )} />
+                    <div className="p-4 bg-muted/30 border-2 border-border">
+                      <span className="font-display text-pixel-xs text-primary">{item.year}</span>
+                      <h4 className="font-sans text-lg text-foreground mt-1">{item.title}</h4>
+                      <p className="text-sm text-muted-foreground mt-2">{item.description}</p>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))
+              )}
             </div>
           </div>
         </div>

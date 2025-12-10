@@ -57,6 +57,16 @@ export interface Skill {
 }
 
 /**
+ * Interface pour une étape de la timeline
+ */
+export interface TimelineItem {
+  id: string;           // Identifiant unique
+  year: string;         // Année (ex: "2024")
+  title: string;        // Titre de l'événement
+  description: string;  // Description détaillée
+}
+
+/**
  * Interface pour un projet
  */
 export interface Project {
@@ -100,6 +110,7 @@ export interface ContactMessage {
  */
 export interface PortfolioData {
   profile: Profile;
+  timeline: TimelineItem[];
   skills: Skill[];
   projects: Project[];
   articles: Article[];
@@ -165,6 +176,7 @@ export function saveData(data: PortfolioData): void {
     // 1. Mise à jour explicite des données en mémoire
     // On remplace les références pour être sûr que l'application voit les changements
     defaultData.profile = data.profile;
+    defaultData.timeline = data.timeline;
     defaultData.skills = data.skills;
     defaultData.projects = data.projects;
     defaultData.articles = data.articles;
@@ -275,6 +287,52 @@ export function deleteSkill(id: string): void {
   const data = getData();
   // filter crée un nouveau tableau sans l'élément à supprimer
   data.skills = data.skills.filter((s) => s.id !== id);
+  saveData(data);
+}
+
+// ------------------------------------------
+// GESTION DE LA TIMELINE (HISTORIQUE)
+// ------------------------------------------
+
+/**
+ * Récupère la timeline
+ * @returns {TimelineItem[]} - Tableau d'événements
+ */
+export function getTimeline(): TimelineItem[] {
+  return getData().timeline;
+}
+
+/**
+ * Ajoute un nouvel événement à la timeline
+ */
+export function addTimelineItem(item: Omit<TimelineItem, "id">): void {
+  const data = getData();
+  const newItem: TimelineItem = {
+    ...item,
+    id: generateId(),
+  };
+  data.timeline.push(newItem);
+  saveData(data);
+}
+
+/**
+ * Met à jour un événement de la timeline
+ */
+export function updateTimelineItem(id: string, updates: Partial<TimelineItem>): void {
+  const data = getData();
+  const index = data.timeline.findIndex((t) => t.id === id);
+  if (index !== -1) {
+    data.timeline[index] = { ...data.timeline[index], ...updates };
+    saveData(data);
+  }
+}
+
+/**
+ * Supprime un événement de la timeline
+ */
+export function deleteTimelineItem(id: string): void {
+  const data = getData();
+  data.timeline = data.timeline.filter((t) => t.id !== id);
   saveData(data);
 }
 
