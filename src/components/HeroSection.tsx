@@ -147,16 +147,8 @@ export function HeroSection() {
               "text-4xl sm:text-5xl md:text-6xl lg:text-7xl",
               "font-display font-bold",
               "mb-4",
-              "text-primary",
-              "animate-pulse-glow"
+              "text-primary"
             )}
-            style={{
-              textShadow: `
-                0 0 10px hsl(var(--primary)),
-                0 0 20px hsl(var(--primary)),
-                0 0 40px hsl(var(--primary) / 0.5)
-              `
-            }}
           >
             {displayedTitle}
             {!titleComplete && (

@@ -46,7 +46,7 @@ export function AboutSection() {
             <Shield className="w-4 h-4" />
             CHARACTER INFO
           </div>
-          <h2 className="text-3xl md:text-4xl font-display text-primary animate-pulse-glow">
+          <h2 className="text-3xl md:text-4xl font-display text-primary">
             PROFIL DU HÉROS
           </h2>
         </div>
