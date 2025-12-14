@@ -90,9 +90,9 @@
     --ring: 38 55% 55%;
 
     /* ------------------------------------------
-       RAYONS DE BORDURE (style rétro = plus anguleux)
+       RAYONS DE BORDURE (coins arrondis doux)
        ------------------------------------------ */
-    --radius: 4px;
+    --radius: 12px;
 
     /* ------------------------------------------
        SIDEBAR
@@ -313,15 +313,17 @@
      ------------------------------------------ */
 
   .pixel-border {
-    border: 4px solid hsl(var(--border));
+    border: 3px solid hsl(var(--border));
+    border-radius: 16px;
     box-shadow: 
-      inset -4px -4px 0 0 hsl(var(--border) / 0.5),
-      inset 4px 4px 0 0 hsl(var(--primary) / 0.3);
+      inset -2px -2px 0 0 hsl(var(--border) / 0.3),
+      inset 2px 2px 0 0 hsl(var(--primary) / 0.2);
   }
 
   .pixel-border-animated {
-    border: 4px solid hsl(var(--primary));
-    animation: pixel-border-pulse 2s ease-in-out infinite;
+    border: 3px solid hsl(var(--primary));
+    border-radius: 16px;
+    animation: pixel-border-pulse 2.5s ease-in-out infinite;
   }
 
   /* ------------------------------------------
@@ -330,18 +332,20 @@
   
   .rpg-box {
     background: linear-gradient(180deg, hsl(var(--card)) 0%, hsl(240 10% 8%) 100%);
-    border: 4px solid hsl(var(--primary));
+    border: 3px solid hsl(var(--primary));
+    border-radius: 20px;
     box-shadow: 
       0 0 0 2px hsl(var(--background)),
-      0 0 20px hsl(var(--primary) / 0.3);
+      0 0 20px hsl(var(--primary) / 0.25);
     position: relative;
   }
 
   .rpg-box::before {
     content: "";
     position: absolute;
-    inset: 4px;
-    border: 2px solid hsl(var(--primary) / 0.3);
+    inset: 6px;
+    border: 2px solid hsl(var(--primary) / 0.2);
+    border-radius: 14px;
     pointer-events: none;
   }
 
@@ -398,15 +402,16 @@
   .pixel-badge {
     background: linear-gradient(180deg, hsl(var(--primary)) 0%, hsl(38 55% 45%) 100%);
     color: hsl(var(--primary-foreground));
-    padding: 4px 12px;
+    padding: 4px 14px;
     font-family: 'Press Start 2P', cursive;
     font-size: 10px;
     text-transform: uppercase;
     letter-spacing: 1px;
-    border: 2px solid hsl(var(--primary-foreground) / 0.2);
+    border: 2px solid hsl(var(--primary-foreground) / 0.15);
+    border-radius: 10px;
     box-shadow: 
-      2px 2px 0 hsl(38 45% 35%),
-      0 0 10px hsl(var(--primary) / 0.4);
+      0 3px 6px hsl(38 45% 35% / 0.3),
+      0 0 8px hsl(var(--primary) / 0.3);
   }
 
   /* ------------------------------------------
@@ -415,6 +420,7 @@
   .xp-bar {
     background: hsl(var(--muted));
     border: 2px solid hsl(var(--border));
+    border-radius: 8px;
     height: 16px;
     position: relative;
     overflow: hidden;
@@ -453,11 +459,11 @@
 @keyframes pixel-border-pulse {
   0%, 100% {
     border-color: hsl(var(--primary));
-    box-shadow: 0 0 10px hsl(var(--primary) / 0.5);
+    box-shadow: 0 0 8px hsl(var(--primary) / 0.35);
   }
   50% {
     border-color: hsl(var(--secondary));
-    box-shadow: 0 0 20px hsl(var(--secondary) / 0.5);
+    box-shadow: 0 0 12px hsl(var(--secondary) / 0.35);
   }
 }
 
