@@ -22,12 +22,18 @@ interface SkillBarProps {
 }
 
 function SkillBar({ name, level, animated, delay }: SkillBarProps) {
-  // Niveau textuel
+  // Niveau textuel style RPG
   const getLevelLabel = (lvl: number) => {
-    if (lvl >= 90) return "Expert";
-    if (lvl >= 70) return "Avancé";
-    if (lvl >= 50) return "Intermédiaire";
-    return "Débutant";
+    if (lvl >= 90) return "★★★ MASTER";
+    if (lvl >= 70) return "★★ AVANCÉ";
+    if (lvl >= 50) return "★ INTER";
+    return "NOVICE";
+  };
+
+  const getRankColor = (lvl: number) => {
+    if (lvl >= 90) return "text-accent";
+    if (lvl >= 70) return "text-primary";
+    return "text-muted-foreground";
   };
 
   return (
@@ -36,7 +42,7 @@ function SkillBar({ name, level, animated, delay }: SkillBarProps) {
         <span className="text-sm font-medium text-foreground uppercase tracking-wide">
           {name}
         </span>
-        <span className="font-mono text-xs text-muted-foreground">
+        <span className={cn("font-mono text-xs", getRankColor(level))}>
           {getLevelLabel(level)}
         </span>
       </div>

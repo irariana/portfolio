@@ -72,13 +72,26 @@ export function HeroSection() {
           </h1>
         </div>
 
-        {/* Sous-titre avec lignes décoratives */}
-        <div className="flex items-center justify-center gap-4 mb-8">
+        {/* Sous-titre avec lignes décoratives + touches gaming */}
+        <div className="flex items-center justify-center gap-4 mb-4">
           <div className="flex-1 h-px bg-border max-w-24" />
           <span className="subheadline text-muted-foreground">
             {profile?.title || "ÉTUDIANT DATA SCIENCE"}
           </span>
           <div className="flex-1 h-px bg-border max-w-24" />
+        </div>
+
+        {/* Badges gaming style */}
+        <div className="flex flex-wrap justify-center gap-3 mb-8">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-accent/10 border border-accent/30 text-accent text-xs font-mono">
+            🎮 +10 Gaming
+          </span>
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-accent/10 border border-accent/30 text-accent text-xs font-mono">
+            🏆 +10 Sports
+          </span>
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-accent/10 border border-accent/30 text-accent text-xs font-mono">
+            📺 +10 Animés
+          </span>
         </div>
 
         {/* Double ligne décorative */}
