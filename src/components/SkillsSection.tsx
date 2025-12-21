@@ -1,149 +1,55 @@
 /* ==========================================
-   COMPOSANT SKILLS SECTION (COMPÉTENCES)
+   COMPOSANT SKILLS SECTION - STYLE JOURNAL VINTAGE
    ==========================================
    
-   Style RPG : Barres de stats comme dans les jeux vidéo
-   avec des effets néon et des animations pixel art.
+   Compétences présentées comme un index de journal
+   avec barres de progression élégantes.
 */
 
 import { useEffect, useState, useRef } from "react";
-import { Code, Database, BarChart3, GitBranch, Calculator, LineChart, PieChart, Brain, Wrench, Sword, Shield, Zap } from "lucide-react";
 import { getSkills, type Skill } from "@/lib/dataManager";
 import { cn } from "@/lib/utils";
 
 // ==========================================
-// MAPPING DES ICÔNES RPG
+// COMPOSANT BARRE DE PROGRESSION
 // ==========================================
 
-const iconMap: Record<string, typeof Code> = {
-  code: Code,
-  database: Database,
-  "bar-chart": BarChart3,
-  "git-branch": GitBranch,
-  calculator: Calculator,
-  "line-chart": LineChart,
-  "pie-chart": PieChart,
-  brain: Brain,
-  wrench: Wrench
-};
-
-// ==========================================
-// COMPOSANT BARRE DE STATS RPG
-// ==========================================
-
-interface StatBarProps {
-  value: number;
+interface SkillBarProps {
+  name: string;
+  level: number;
   animated: boolean;
   delay: number;
 }
 
-function StatBar({ value, animated, delay }: StatBarProps) {
-  // Détermine la couleur selon le niveau (comme dans les RPG)
-  const getBarColor = (level: number) => {
-    if (level >= 80) return "from-accent to-accent/70"; // Or/Légendaire
-    if (level >= 60) return "from-secondary to-secondary/70"; // Magenta/Épique
-    if (level >= 40) return "from-primary to-primary/70"; // Cyan/Rare
-    return "from-muted-foreground to-muted-foreground/70"; // Gris/Commun
+function SkillBar({ name, level, animated, delay }: SkillBarProps) {
+  // Niveau textuel
+  const getLevelLabel = (lvl: number) => {
+    if (lvl >= 90) return "Expert";
+    if (lvl >= 70) return "Avancé";
+    if (lvl >= 50) return "Intermédiaire";
+    return "Débutant";
   };
 
   return (
-    <div className="relative h-4 rounded pixel-border bg-muted/50 overflow-hidden">
-      {/* Fond pixelisé */}
-      <div className="absolute inset-0 opacity-20" 
-        style={{ 
-          backgroundImage: "repeating-linear-gradient(90deg, transparent, transparent 4px, rgba(0,0,0,0.3) 4px, rgba(0,0,0,0.3) 8px)" 
-        }} 
-      />
-      
-      {/* Barre de progression avec effet néon */}
-      <div
-        className={cn(
-          "h-full rounded-sm",
-          "bg-gradient-to-r",
-          getBarColor(value),
-          "transition-all duration-1000 ease-out",
-          "shadow-[0_0_10px_currentColor]"
-        )}
-        style={{
-          width: animated ? `${value}%` : "0%",
-          transitionDelay: `${delay}ms`
-        }}
-      />
-      
-      {/* Segments de barre (style RPG) */}
-      <div className="absolute inset-0 flex">
-        {[...Array(10)].map((_, i) => (
-          <div key={i} className="flex-1 border-r border-background/30 last:border-r-0" />
-        ))}
-      </div>
-    </div>
-  );
-}
-
-// ==========================================
-// COMPOSANT CARTE DE COMPÉTENCE RPG
-// ==========================================
-
-interface SkillCardProps {
-  skill: Skill;
-  index: number;
-  animated: boolean;
-}
-
-function SkillCard({ skill, index, animated }: SkillCardProps) {
-  const IconComponent = iconMap[skill.icon || "code"] || Code;
-  
-  // Rang selon le niveau (vocabulaire RPG)
-  const getRank = (level: number) => {
-    if (level >= 90) return { name: "LÉGENDAIRE", color: "text-accent" };
-    if (level >= 75) return { name: "ÉPIQUE", color: "text-secondary" };
-    if (level >= 50) return { name: "RARE", color: "text-primary" };
-    if (level >= 25) return { name: "COMMUN", color: "text-muted-foreground" };
-    return { name: "NOVICE", color: "text-muted-foreground/50" };
-  };
-
-  const rank = getRank(skill.level);
-
-  return (
-    <div
-      className={cn(
-        "rpg-box p-4",
-        "group relative overflow-hidden",
-        "hover:border-accent/50",
-        "transition-all duration-300",
-        animated && "animate-fade-in"
-      )}
-      style={{ animationDelay: `${index * 50}ms` }}
-    >
-      {/* Effet de brillance au hover */}
-      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-accent/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
-      
-      {/* En-tête avec icône et rang */}
-      <div className="flex items-center justify-between mb-3 relative">
-        <div className="flex items-center gap-3">
-          {/* Icône avec effet néon */}
-          <div className="p-2 rounded pixel-border bg-primary/20 group-hover:shadow-glow transition-shadow">
-            <IconComponent className="w-5 h-5 text-primary" />
-          </div>
-          {/* Nom de la compétence */}
-          <span className="font-pixel text-xs text-foreground uppercase tracking-wide">
-            {skill.name}
-          </span>
-        </div>
-        
-        {/* Badge de rang */}
-        <span className={cn("font-pixel text-[10px]", rank.color)}>
-          {rank.name}
+    <div className="py-3 border-b border-border last:border-b-0">
+      <div className="flex items-center justify-between mb-2">
+        <span className="text-sm font-medium text-foreground uppercase tracking-wide">
+          {name}
+        </span>
+        <span className="font-mono text-xs text-muted-foreground">
+          {getLevelLabel(level)}
         </span>
       </div>
-
-      {/* Barre de stats */}
-      <StatBar value={skill.level} animated={animated} delay={index * 100 + 200} />
       
-      {/* Niveau numérique */}
-      <div className="flex justify-between mt-2">
-        <span className="font-pixel text-[10px] text-muted-foreground">LVL</span>
-        <span className="font-pixel text-sm text-accent">{skill.level}</span>
+      {/* Barre de progression minimaliste */}
+      <div className="progress-bar">
+        <div
+          className="progress-bar-fill"
+          style={{
+            width: animated ? `${level}%` : "0%",
+            transitionDelay: `${delay}ms`
+          }}
+        />
       </div>
     </div>
   );
@@ -191,63 +97,49 @@ export function SkillsSection() {
   }, {} as Record<string, Skill[]>);
 
   return (
-    <section ref={sectionRef} id="skills" className="py-20 md:py-32 relative">
-      {/* Particules de fond */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(15)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute w-1 h-1 bg-primary/30 rounded-full animate-float"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 5}s`,
-              animationDuration: `${3 + Math.random() * 4}s`
-            }}
-          />
-        ))}
-      </div>
-
-      <div className="container mx-auto px-4 relative">
-        {/* En-tête RPG */}
-        <div className="text-center mb-16">
-          {/* Badge style inventaire */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 rpg-box text-accent font-pixel text-xs mb-4">
-            <Sword className="w-4 h-4" />
-            STATS DU PERSONNAGE
-            <Shield className="w-4 h-4" />
-          </div>
-
-          {/* Titre avec effet néon */}
-          <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
-            <span className="neon-text">Compétences</span>
+    <section 
+      ref={sectionRef} 
+      id="skills" 
+      className="py-16 md:py-24 bg-muted/30"
+    >
+      <div className="container mx-auto px-4">
+        
+        {/* En-tête */}
+        <div className="text-center mb-12">
+          <span className="journal-badge mb-4 inline-block">COMPÉTENCES</span>
+          <h2 className="headline text-4xl md:text-5xl text-primary mt-4">
+            Skills Index
           </h2>
-
-          {/* Description */}
-          <p className="text-muted-foreground max-w-2xl mx-auto font-pixel text-xs leading-relaxed">
-            Mes points de compétences acquis au fil des quêtes et des aventures...
+          <p className="text-muted-foreground mt-4 max-w-xl mx-auto">
+            Mes compétences techniques acquises au fil des projets et formations.
           </p>
         </div>
 
         {/* Grille des compétences par catégorie */}
-        <div className="space-y-12">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
           {Object.entries(skillsByCategory).map(([category, categorySkills], categoryIndex) => (
-            <div key={category}>
-              {/* Titre de catégorie style RPG */}
-              <h3 className="flex items-center gap-3 text-lg font-display font-semibold text-foreground mb-6">
-                <Zap className="w-5 h-5 text-accent" />
-                <span className="pixel-border px-3 py-1 bg-muted/30">{category}</span>
-                <div className="flex-1 h-px bg-gradient-to-r from-accent/50 to-transparent" />
+            <div 
+              key={category} 
+              className={cn(
+                "journal-box p-6",
+                "animate-fade-in"
+              )}
+              style={{ animationDelay: `${categoryIndex * 100}ms` }}
+            >
+              {/* Titre de catégorie */}
+              <h3 className="subheadline text-primary mb-4 pb-3 border-b-2 border-primary">
+                {category}
               </h3>
 
-              {/* Grille des skills */}
-              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {/* Liste des skills */}
+              <div>
                 {categorySkills.map((skill, skillIndex) => (
-                  <SkillCard
+                  <SkillBar
                     key={skill.id}
-                    skill={skill}
-                    index={categoryIndex * 3 + skillIndex}
+                    name={skill.name}
+                    level={skill.level}
                     animated={isVisible}
+                    delay={categoryIndex * 100 + skillIndex * 50}
                   />
                 ))}
               </div>
@@ -255,25 +147,26 @@ export function SkillsSection() {
           ))}
         </div>
 
-        {/* Stats globales style RPG */}
-        <div className="mt-16 rpg-box p-6 max-w-md mx-auto text-center">
-          <h4 className="font-pixel text-xs text-accent mb-4">RÉSUMÉ DU JOUEUR</h4>
-          <div className="grid grid-cols-3 gap-4">
-            <div>
-              <div className="text-2xl font-display font-bold text-primary">{skills.length}</div>
-              <div className="font-pixel text-[10px] text-muted-foreground">SKILLS</div>
+        {/* Stats résumées */}
+        <div className="mt-12 text-center">
+          <div className="inline-flex items-center gap-8 journal-box p-6">
+            <div className="text-center">
+              <span className="headline text-3xl text-primary block">{skills.length}</span>
+              <span className="caption-text text-muted-foreground">Compétences</span>
             </div>
-            <div>
-              <div className="text-2xl font-display font-bold text-secondary">
-                {Math.round(skills.reduce((acc, s) => acc + s.level, 0) / skills.length || 0)}
-              </div>
-              <div className="font-pixel text-[10px] text-muted-foreground">MOY. LVL</div>
+            <div className="w-px h-12 bg-border" />
+            <div className="text-center">
+              <span className="headline text-3xl text-primary block">
+                {Math.round(skills.reduce((acc, s) => acc + s.level, 0) / skills.length || 0)}%
+              </span>
+              <span className="caption-text text-muted-foreground">Moyenne</span>
             </div>
-            <div>
-              <div className="text-2xl font-display font-bold text-accent">
+            <div className="w-px h-12 bg-border" />
+            <div className="text-center">
+              <span className="headline text-3xl text-primary block">
                 {Object.keys(skillsByCategory).length}
-              </div>
-              <div className="font-pixel text-[10px] text-muted-foreground">CLASSES</div>
+              </span>
+              <span className="caption-text text-muted-foreground">Catégories</span>
             </div>
           </div>
         </div>

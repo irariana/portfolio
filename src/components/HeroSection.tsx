@@ -1,105 +1,34 @@
 /* ==========================================
-   COMPOSANT HERO SECTION - STYLE RPG RÉTRO
+   COMPOSANT HERO SECTION - STYLE JOURNAL VINTAGE
    ==========================================
    
-   Section d'accueil principale du portfolio.
-   Design inspiré des écrans titre de jeux 8-bit/16-bit.
-   
-   Fonctionnalités :
-   - Particules pixelisées en arrière-plan
-   - Titre avec effet néon
-   - Animation de typing style terminal
-   - Badges style items RPG
+   En-tête style journal/newspaper avec nom en grand,
+   date, édition - mais avec une touche gaming subtile.
 */
 
 import { useEffect, useState } from "react";
-import { ChevronDown, Github, Linkedin, Mail, Gamepad2, Trophy, Tv, Sword, Shield, Star } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Github, Linkedin, Mail } from "lucide-react";
 import { getProfile, type Profile } from "@/lib/dataManager";
 import { cn } from "@/lib/utils";
 
-// ==========================================
-// COMPOSANT PARTICULES PIXELISÉES
-// ==========================================
-
-/**
- * Crée des particules pixelisées style 8-bit
- * Ressemble à des étoiles/pixels qui flottent
- */
-function PixelParticles() {
-  const particleCount = 40;
-
-  const particles = Array.from({ length: particleCount }, (_, i) => ({
-    id: i,
-    left: `${Math.random() * 100}%`,
-    // Tailles en multiples de 4 pour l'effet pixel
-    size: (Math.floor(Math.random() * 3) + 1) * 4,
-    duration: Math.random() * 15 + 10,
-    delay: Math.random() * 20,
-    opacity: Math.random() * 0.6 + 0.2,
-    // Couleur aléatoire (or, cyan ou magenta)
-    color: ['primary', 'secondary', 'tertiary'][Math.floor(Math.random() * 3)],
-  }));
-
-  return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {particles.map((particle) => (
-        <div
-          key={particle.id}
-          className={cn(
-            "absolute",
-            particle.color === 'primary' && "bg-primary",
-            particle.color === 'secondary' && "bg-secondary",
-            particle.color === 'tertiary' && "bg-tertiary",
-          )}
-          style={{
-            left: particle.left,
-            width: `${particle.size}px`,
-            height: `${particle.size}px`,
-            opacity: particle.opacity,
-            animation: `particle-float ${particle.duration}s linear infinite`,
-            animationDelay: `${particle.delay}s`,
-            // Pas de border-radius = pixel carré
-            borderRadius: 0,
-            boxShadow: `0 0 ${particle.size}px currentColor`,
-          }}
-        />
-      ))}
-    </div>
-  );
-}
-
-// ==========================================
-// COMPOSANT HERO PRINCIPAL
-// ==========================================
-
 export function HeroSection() {
   const [profile, setProfile] = useState<Profile | null>(null);
-  const [displayedTitle, setDisplayedTitle] = useState("");
-  const [titleComplete, setTitleComplete] = useState(false);
 
-  // Titre style RPG
-  const fullTitle = "DATA QUEST";
-  const subtitle = "Gaming × Sports × Animés × Data Science";
+  // Date formatée style journal
+  const today = new Date();
+  const formattedDate = today.toLocaleDateString("fr-FR", {
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  }).toUpperCase();
+
+  const year = today.getFullYear();
 
   useEffect(() => {
     const data = getProfile();
     setProfile(data);
   }, []);
-
-  // Animation de typing
-  useEffect(() => {
-    if (displayedTitle.length >= fullTitle.length) {
-      setTitleComplete(true);
-      return;
-    }
-
-    const timer = setTimeout(() => {
-      setDisplayedTitle(fullTitle.slice(0, displayedTitle.length + 1));
-    }, 150); // Plus lent pour l'effet rétro
-
-    return () => clearTimeout(timer);
-  }, [displayedTitle]);
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -108,247 +37,160 @@ export function HeroSection() {
     }
   };
 
+  // Extraire prénom et nom
+  const nameParts = profile?.name?.split(" ") || ["VOTRE", "NOM"];
+  const firstName = nameParts[0]?.toUpperCase() || "VOTRE";
+  const lastName = nameParts.slice(1).join(" ").toUpperCase() || "NOM";
+
   return (
     <section
       id="hero"
       className={cn(
         "min-h-screen relative",
-        "flex items-center justify-center",
-        "bg-grid overflow-hidden"
+        "flex flex-col items-center justify-center",
+        "bg-background paper-texture",
+        "py-16 px-4"
       )}
     >
-      {/* Particules pixelisées */}
-      <PixelParticles />
+      {/* Container principal */}
+      <div className="max-w-4xl mx-auto w-full">
+        
+        {/* Barre supérieure style journal */}
+        <div className="flex items-center justify-between text-xs font-mono text-muted-foreground mb-6 border-b border-border pb-4">
+          <span>VOL. {year} • ÉDITION PORTFOLIO</span>
+          <span>{formattedDate}</span>
+          <span>EST. {year}</span>
+        </div>
 
-      {/* Overlay scanlines */}
-      <div className="absolute inset-0 scanlines opacity-30" />
-
-      {/* Dégradé de fond */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-background/90 to-background" />
-
-      {/* Contenu principal */}
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="max-w-4xl mx-auto text-center">
-
-          {/* Badge "Press Start" */}
-          <div
-            className={cn(
-              "inline-block mb-8 animate-arcade-blink",
-              "font-display text-pixel-sm",
-              "text-primary"
-            )}
-          >
-            ▶ PRESS START ◀
-          </div>
-
-          {/* Titre principal style arcade */}
-          <h1
-            className={cn(
-              "text-4xl sm:text-5xl md:text-6xl lg:text-7xl",
-              "font-display font-bold",
-              "mb-4",
-              "text-primary"
-            )}
-          >
-            {displayedTitle}
-            {!titleComplete && (
-              <span className="inline-block w-[0.5em] h-[1em] bg-primary ml-2 animate-blink-caret" />
-            )}
+        {/* Nom principal - Style masthead de journal */}
+        <div className="text-center mb-8">
+          <h1 className="headline text-6xl sm:text-7xl md:text-8xl lg:text-9xl text-primary tracking-tight">
+            {firstName}
           </h1>
+          <h1 className="headline text-6xl sm:text-7xl md:text-8xl lg:text-9xl text-primary tracking-tight -mt-2 md:-mt-4">
+            {lastName}
+          </h1>
+        </div>
 
-          {/* Sous-titre gradient */}
-          <p
-            className={cn(
-              "text-lg md:text-xl lg:text-2xl",
-              "font-sans",
-              "gradient-text",
-              "mb-8",
-              "animate-fade-in"
-            )}
-            style={{ animationDelay: "0.5s" }}
-          >
-            {subtitle}
-          </p>
+        {/* Sous-titre avec lignes décoratives */}
+        <div className="flex items-center justify-center gap-4 mb-8">
+          <div className="flex-1 h-px bg-border max-w-24" />
+          <span className="subheadline text-muted-foreground">
+            {profile?.title || "ÉTUDIANT DATA SCIENCE"}
+          </span>
+          <div className="flex-1 h-px bg-border max-w-24" />
+        </div>
 
-          {/* Badges style items RPG */}
-          <div className="flex flex-wrap justify-center gap-4 mb-10 animate-fade-in" style={{ animationDelay: "0.8s" }}>
-            {/* Badge Gaming */}
-            <div className={cn(
-              "flex items-center gap-2 px-4 py-2",
-              "rpg-box",
-              "text-primary font-sans text-lg"
-            )}>
-              <Gamepad2 className="w-5 h-5" />
-              <span>+10 Gaming</span>
-            </div>
+        {/* Double ligne décorative */}
+        <div className="journal-divider-double mb-8" />
 
-            {/* Badge Sports */}
-            <div className={cn(
-              "flex items-center gap-2 px-4 py-2",
-              "rpg-box",
-              "text-secondary font-sans text-lg"
-            )}>
-              <Trophy className="w-5 h-5" />
-              <span>+10 Sports</span>
-            </div>
-
-            {/* Badge Animés */}
-            <div className={cn(
-              "flex items-center gap-2 px-4 py-2",
-              "rpg-box",
-              "text-tertiary font-sans text-lg"
-            )}>
-              <Tv className="w-5 h-5" />
-              <span>+10 Animés</span>
-            </div>
+        {/* Section "Special Report" style */}
+        <div className="grid md:grid-cols-12 gap-8 items-start">
+          
+          {/* Photo + légende (style figure de journal) */}
+          <div className="md:col-span-4">
+            <figure className="journal-box p-2">
+              {profile?.avatar ? (
+                <img 
+                  src={profile.avatar} 
+                  alt={profile.name}
+                  className="w-full aspect-square object-cover grayscale hover:grayscale-0 transition-all duration-500"
+                />
+              ) : (
+                <div className="w-full aspect-square bg-muted flex items-center justify-center">
+                  <span className="text-4xl">👤</span>
+                </div>
+              )}
+              <figcaption className="caption-text text-center mt-2 text-muted-foreground">
+                FIG 1. DATA SCIENTIST
+              </figcaption>
+            </figure>
           </div>
 
-          {/* Titre professionnel */}
-          <p
-            className={cn(
-              "text-xl md:text-2xl",
-              "text-muted-foreground",
-              "mb-3",
-              "font-sans",
-              "animate-fade-in"
-            )}
-            style={{ animationDelay: "1s" }}
-          >
-            {profile?.title || "Étudiant BUT Science des Données"}
-          </p>
+          {/* Contenu principal */}
+          <div className="md:col-span-8">
+            <h2 className="headline text-2xl md:text-3xl text-primary mb-2">
+              Special Report: L'Aventurier Data
+            </h2>
+            <p className="caption-text text-muted-foreground mb-4">
+              PAR {profile?.name?.toUpperCase() || "L'ÉDITEUR"} •
+            </p>
+            
+            <div className="body-text text-foreground/90 space-y-4 drop-cap">
+              <p>
+                {profile?.bio || 
+                  "Passionné par la Data Science, les jeux vidéo et les animés. Je cherche à appliquer l'analyse de données dans mes domaines de passion : e-sport, statistiques sportives et les recherches en tout genre."}
+              </p>
+            </div>
 
-          {/* Description */}
-          <p
-            className={cn(
-              "text-lg",
-              "text-muted-foreground/80",
-              "max-w-2xl mx-auto",
-              "mb-10",
-              "font-sans",
-              "animate-fade-in"
-            )}
-            style={{ animationDelay: "1.2s" }}
-          >
-            Bienvenue dans mon univers.
-
-            Un espace où les idées prennent forme, où la curiosité guide chaque projet et où la technologie devient un terrain d’exploration.
-            Ici, je partage mon parcours, mes créations et les expériences qui façonnent ma vision du numérique et de la data.
-
-            Chaque projet raconte une histoire : celle d’un apprentissage, d’un défi relevé, d’une envie d’aller plus loin.
-            Prenez le temps d’explorer, et si cet univers vous parle, discutons-en.
-          </p>
-
-          {/* Boutons CTA style RPG */}
-          <div
-            className="flex flex-wrap justify-center gap-4 mb-12 animate-fade-in"
-            style={{ animationDelay: "1.4s" }}
-          >
-            {/* Bouton principal */}
-            <Button
-              size="lg"
-              className={cn(
-                "gradient-primary text-primary-foreground",
-                "font-display text-pixel-sm",
-                "px-8 py-6",
-                "border-2 border-primary-foreground/20",
-                "shadow-pixel hover:shadow-pixel-lg",
-                "transition-all duration-200",
-                "hover:translate-y-[-2px]"
-              )}
-              onClick={() => scrollToSection("projects")}
-            >
-              <Sword className="w-4 h-4 mr-2" />
-              VOIR MES QUÊTES
-            </Button>
-
-            {/* Bouton secondaire */}
-            <Button
-              size="lg"
-              variant="outline"
-              className={cn(
-                "border-2 border-secondary text-secondary",
-                "font-display text-pixel-sm",
-                "px-8 py-6",
-                "hover:bg-secondary/20",
-                "shadow-glow-secondary",
-                "transition-all duration-200"
-              )}
-              onClick={() => scrollToSection("contact")}
-            >
-              <Shield className="w-4 h-4 mr-2" />
-              ME CONTACTER
-            </Button>
-          </div>
-
-          {/* Liens réseaux sociaux */}
-          <div
-            className="flex justify-center gap-6 animate-fade-in"
-            style={{ animationDelay: "1.6s" }}
-          >
-            {profile?.socials?.github && (
-              <a
-                href={profile.socials.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={cn(
-                  "p-3 rpg-box",
-                  "text-muted-foreground hover:text-primary",
-                  "transition-all duration-200",
-                  "hover:shadow-glow"
+            {/* Liens sociaux style journal */}
+            <div className="mt-8 pt-6 border-t border-border">
+              <p className="caption-text text-muted-foreground mb-4">
+                CONTACT & RÉSEAUX
+              </p>
+              <div className="flex gap-4">
+                {profile?.socials?.github && (
+                  <a
+                    href={profile.socials.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={cn(
+                      "p-3 journal-box-bordered",
+                      "text-primary hover:bg-primary hover:text-primary-foreground",
+                      "transition-all duration-300"
+                    )}
+                    aria-label="GitHub"
+                  >
+                    <Github className="w-5 h-5" />
+                  </a>
                 )}
-                aria-label="Voir mon profil GitHub"
-              >
-                <Github className="w-6 h-6" />
-              </a>
-            )}
 
-            {profile?.socials?.linkedin && (
-              <a
-                href={profile.socials.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={cn(
-                  "p-3 rpg-box",
-                  "text-muted-foreground hover:text-secondary",
-                  "transition-all duration-200",
-                  "hover:shadow-glow-secondary"
+                {profile?.socials?.linkedin && (
+                  <a
+                    href={profile.socials.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={cn(
+                      "p-3 journal-box-bordered",
+                      "text-primary hover:bg-primary hover:text-primary-foreground",
+                      "transition-all duration-300"
+                    )}
+                    aria-label="LinkedIn"
+                  >
+                    <Linkedin className="w-5 h-5" />
+                  </a>
                 )}
-                aria-label="Voir mon profil LinkedIn"
-              >
-                <Linkedin className="w-6 h-6" />
-              </a>
-            )}
 
-            {profile?.socials?.email && (
-              <a
-                href={`mailto:${profile.socials.email}`}
-                className={cn(
-                  "p-3 rpg-box",
-                  "text-muted-foreground hover:text-tertiary",
-                  "transition-all duration-200",
-                  "hover:shadow-glow-tertiary"
+                {profile?.socials?.email && (
+                  <a
+                    href={`mailto:${profile.socials.email}`}
+                    className={cn(
+                      "p-3 journal-box-bordered",
+                      "text-primary hover:bg-primary hover:text-primary-foreground",
+                      "transition-all duration-300"
+                    )}
+                    aria-label="Email"
+                  >
+                    <Mail className="w-5 h-5" />
+                  </a>
                 )}
-                aria-label="M'envoyer un email"
-              >
-                <Mail className="w-6 h-6" />
-              </a>
-            )}
+              </div>
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* Indicateur de scroll */}
-      <div
-        className={cn(
-          "absolute bottom-8 left-1/2 -translate-x-1/2",
-          "animate-float",
-          "cursor-pointer"
-        )}
-        onClick={() => scrollToSection("about")}
-      >
-        <div className="flex flex-col items-center gap-2">
-          <span className="text-primary font-display text-pixel-xs">SCROLL</span>
-          <ChevronDown className="w-8 h-8 text-primary" />
+        {/* Indicateur de scroll */}
+        <div
+          className={cn(
+            "mt-16 text-center cursor-pointer",
+            "animate-float"
+          )}
+          onClick={() => scrollToSection("about")}
+        >
+          <span className="caption-text text-muted-foreground block mb-2">
+            CONTINUER LA LECTURE
+          </span>
+          <span className="text-2xl">↓</span>
         </div>
       </div>
     </section>

@@ -1,26 +1,24 @@
 /* ==========================================
-   POLICES RPG RÉTRO
+   POLICES JOURNAL VINTAGE
    ==========================================
    
-   Polices choisies pour un style pixel/rétro RPG :
-   - Press Start 2P : Police pixelisée classique 8-bit
-   - VT323 : Police terminal rétro
-   - Silkscreen : Police pixel art moderne
+   Style journal/newspaper élégant avec touches gaming :
+   - Playfair Display : Titres élégants style journal
+   - Lora : Corps de texte lisible
+   - Source Serif Pro : Sous-titres raffinés
 */
 
-@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=VT323&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap");
 
 /* ==========================================
-   DESIGN SYSTEM - Style RPG Rétro Gaming
+   DESIGN SYSTEM - Style Journal Vintage Gaming
    ==========================================
 
-   Thème inspiré des jeux vidéo rétro 8-bit/16-bit
-   avec des couleurs néon sur fond sombre.
-   
-   HSL = Hue (teinte), Saturation, Lightness (luminosité)
+   Thème inspiré des journaux vintage avec
+   une touche gaming/RPG subtile.
 */
 
 @tailwind base;
@@ -28,186 +26,152 @@
 @tailwind utilities;
 
 /* ==========================================
-   VARIABLES CSS - Thème RPG Sombre
+   VARIABLES CSS - Thème Journal
    ==========================================
 */
 
 @layer base {
   :root {
     /* ------------------------------------------
-       COULEURS DE FOND - Bleu-gris doux et profond
+       COULEURS DE FOND - Papier crème vintage
        ------------------------------------------ */
-    --background: 230 20% 12%;
-    --foreground: 45 15% 90%;
+    --background: 40 30% 96%;
+    --foreground: 30 10% 15%;
 
     /* ------------------------------------------
-       COULEURS DES CARTES - Style menu RPG adouci
+       COULEURS DES CARTES - Papier légèrement teinté
        ------------------------------------------ */
-    --card: 230 18% 16%;
-    --card-foreground: 45 15% 90%;
+    --card: 40 25% 98%;
+    --card-foreground: 30 10% 15%;
 
-    --popover: 230 18% 18%;
-    --popover-foreground: 45 15% 90%;
-
-    /* ------------------------------------------
-       COULEUR PRIMAIRE - Ambre/Cuivre doux (XP, pièces)
-       ------------------------------------------ */
-    --primary: 38 65% 55%;
-    --primary-foreground: 230 20% 10%;
-    --primary-glow: 38 55% 65%;
+    --popover: 40 25% 98%;
+    --popover-foreground: 30 10% 15%;
 
     /* ------------------------------------------
-       COULEUR SECONDAIRE - Turquoise pastel (mana/magie)
+       COULEUR PRIMAIRE - Gris-noir élégant
        ------------------------------------------ */
-    --secondary: 175 45% 50%;
-    --secondary-foreground: 230 20% 10%;
+    --primary: 30 5% 20%;
+    --primary-foreground: 40 30% 96%;
 
     /* ------------------------------------------
-       COULEUR TERTIAIRE - Rose poudré (buff/power-up)
+       COULEUR SECONDAIRE - Gris moyen
        ------------------------------------------ */
-    --tertiary: 330 50% 65%;
+    --secondary: 30 5% 45%;
+    --secondary-foreground: 40 30% 96%;
+
+    /* ------------------------------------------
+       COULEUR ACCENT - Or/Bronze subtil (touche gaming)
+       ------------------------------------------ */
+    --accent: 38 45% 50%;
+    --accent-foreground: 40 30% 96%;
 
     /* ------------------------------------------
        COULEURS UTILITAIRES
        ------------------------------------------ */
-    --muted: 230 12% 22%;
-    --muted-foreground: 45 10% 65%;
+    --muted: 40 15% 90%;
+    --muted-foreground: 30 5% 45%;
 
-    --accent: 260 40% 60%;
-    --accent-foreground: 45 15% 90%;
+    --destructive: 0 65% 50%;
+    --destructive-foreground: 40 30% 96%;
 
-    --destructive: 0 55% 55%;
-    --destructive-foreground: 45 15% 90%;
-
-    --success: 145 45% 45%;
-    --success-foreground: 230 20% 10%;
+    --success: 145 50% 40%;
+    --success-foreground: 40 30% 96%;
 
     /* ------------------------------------------
-       BORDURES PIXELISÉES - Plus subtiles
+       BORDURES - Fines et élégantes
        ------------------------------------------ */
-    --border: 38 35% 35%;
-    --input: 230 15% 20%;
-    --ring: 38 55% 55%;
+    --border: 30 10% 75%;
+    --input: 40 15% 90%;
+    --ring: 30 5% 20%;
 
     /* ------------------------------------------
-       RAYONS DE BORDURE (coins arrondis doux)
+       RAYONS DE BORDURE (coins nets style journal)
        ------------------------------------------ */
-    --radius: 12px;
+    --radius: 2px;
 
     /* ------------------------------------------
        SIDEBAR
        ------------------------------------------ */
-    --sidebar-background: 230 18% 14%;
-    --sidebar-foreground: 45 15% 90%;
-    --sidebar-primary: 38 65% 55%;
-    --sidebar-primary-foreground: 230 20% 10%;
-    --sidebar-accent: 175 45% 50%;
-    --sidebar-accent-foreground: 230 20% 10%;
-    --sidebar-border: 38 35% 35%;
-    --sidebar-ring: 38 55% 55%;
-    --sidebar: 230 18% 14%;
+    --sidebar-background: 40 25% 98%;
+    --sidebar-foreground: 30 10% 15%;
+    --sidebar-primary: 30 5% 20%;
+    --sidebar-primary-foreground: 40 30% 96%;
+    --sidebar-accent: 38 45% 50%;
+    --sidebar-accent-foreground: 40 30% 96%;
+    --sidebar-border: 30 10% 75%;
+    --sidebar-ring: 30 5% 20%;
+    --sidebar: 40 25% 98%;
 
     /* Charts */
-    --chart-1: 38 65% 55%;
-    --chart-2: 175 45% 50%;
-    --chart-3: 330 50% 65%;
-    --chart-4: 260 40% 60%;
-    --chart-5: 145 45% 45%;
+    --chart-1: 30 5% 20%;
+    --chart-2: 38 45% 50%;
+    --chart-3: 30 5% 45%;
+    --chart-4: 145 50% 40%;
+    --chart-5: 0 65% 50%;
 
     /* Fonts */
-    --font-sans: 'VT323', ui-monospace, monospace;
-    --font-serif: 'Press Start 2P', cursive;
-    --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+    --font-sans: 'Lora', Georgia, serif;
+    --font-serif: 'Playfair Display', Georgia, serif;
+    --font-mono: 'Courier Prime', monospace;
 
-    /* Shadows - style néon doux */
-    --shadow-2xs: 0 0 2px hsl(38 55% 55% / 0.2);
-    --shadow-xs: 0 0 4px hsl(38 55% 55% / 0.2);
-    --shadow-sm: 0 0 8px hsl(38 55% 55% / 0.25);
-    --shadow: 0 0 12px hsl(38 55% 55% / 0.25);
-    --shadow-md: 0 0 16px hsl(38 55% 55% / 0.3);
-    --shadow-lg: 0 0 24px hsl(38 55% 55% / 0.3);
-    --shadow-xl: 0 0 32px hsl(38 55% 55% / 0.35);
-    --shadow-2xl: 0 0 48px hsl(38 55% 55% / 0.35);
+    /* Shadows - subtiles et élégantes */
+    --shadow-2xs: 0 1px 2px hsl(30 10% 15% / 0.05);
+    --shadow-xs: 0 1px 3px hsl(30 10% 15% / 0.08);
+    --shadow-sm: 0 2px 4px hsl(30 10% 15% / 0.1);
+    --shadow: 0 4px 6px hsl(30 10% 15% / 0.1);
+    --shadow-md: 0 6px 12px hsl(30 10% 15% / 0.1);
+    --shadow-lg: 0 8px 16px hsl(30 10% 15% / 0.1);
+    --shadow-xl: 0 12px 24px hsl(30 10% 15% / 0.12);
+    --shadow-2xl: 0 16px 32px hsl(30 10% 15% / 0.15);
 
-    --tracking-normal: 0.05em;
+    --tracking-normal: 0.02em;
     --spacing: 0.25rem;
   }
 
   /* ==========================================
-     THÈME CLAIR (style Game Boy)
+     THÈME SOMBRE (Journal noir)
      ==========================================
   */
-  .light {
-    --background: 80 30% 85%;
-    --foreground: 80 30% 15%;
-    --card: 80 25% 90%;
-    --card-foreground: 80 30% 15%;
-    --popover: 80 25% 92%;
-    --popover-foreground: 80 30% 15%;
-    --primary: 80 60% 25%;
-    --primary-foreground: 80 30% 95%;
-    --primary-glow: 80 50% 35%;
-    --secondary: 80 40% 40%;
-    --secondary-foreground: 80 30% 95%;
-    --tertiary: 80 50% 30%;
-    --muted: 80 20% 75%;
-    --muted-foreground: 80 20% 35%;
-    --accent: 80 50% 70%;
-    --accent-foreground: 80 30% 15%;
-    --destructive: 0 70% 45%;
-    --destructive-foreground: 80 30% 95%;
-    --success: 120 60% 35%;
-    --success-foreground: 80 30% 95%;
-    --border: 80 30% 60%;
-    --input: 80 25% 80%;
-    --ring: 80 60% 25%;
-  }
-
   .dark {
-    --background: 230 20% 12%;
-    --foreground: 45 15% 90%;
-    --card: 230 18% 16%;
-    --card-foreground: 45 15% 90%;
-    --popover: 230 18% 18%;
-    --popover-foreground: 45 15% 90%;
-    --primary: 38 65% 55%;
-    --primary-foreground: 230 20% 10%;
-    --primary-glow: 38 55% 65%;
-    --secondary: 175 45% 50%;
-    --secondary-foreground: 230 20% 10%;
-    --tertiary: 330 50% 65%;
-    --muted: 230 12% 22%;
-    --muted-foreground: 45 10% 65%;
-    --accent: 260 40% 60%;
-    --accent-foreground: 45 15% 90%;
-    --destructive: 0 55% 55%;
-    --destructive-foreground: 45 15% 90%;
-    --success: 145 45% 45%;
-    --success-foreground: 230 20% 10%;
-    --border: 38 35% 35%;
-    --input: 230 15% 20%;
-    --ring: 38 55% 55%;
-    --chart-1: 38 65% 55%;
-    --chart-2: 175 45% 50%;
-    --chart-3: 330 50% 65%;
-    --chart-4: 260 40% 60%;
-    --chart-5: 145 45% 45%;
-    --sidebar: 230 18% 14%;
-    --sidebar-foreground: 45 15% 90%;
-    --sidebar-primary: 38 65% 55%;
-    --sidebar-primary-foreground: 230 20% 10%;
-    --sidebar-accent: 175 45% 50%;
-    --sidebar-accent-foreground: 230 20% 10%;
-    --sidebar-border: 38 35% 35%;
-    --sidebar-ring: 38 55% 55%;
-    --shadow-2xs: 0 0 2px hsl(38 55% 55% / 0.2);
-    --shadow-xs: 0 0 4px hsl(38 55% 55% / 0.2);
-    --shadow-sm: 0 0 8px hsl(38 55% 55% / 0.25);
-    --shadow: 0 0 12px hsl(38 55% 55% / 0.25);
-    --shadow-md: 0 0 16px hsl(38 55% 55% / 0.3);
-    --shadow-lg: 0 0 24px hsl(38 55% 55% / 0.3);
-    --shadow-xl: 0 0 32px hsl(38 55% 55% / 0.35);
-    --shadow-2xl: 0 0 48px hsl(38 55% 55% / 0.35);
+    --background: 30 10% 8%;
+    --foreground: 40 20% 90%;
+    --card: 30 8% 12%;
+    --card-foreground: 40 20% 90%;
+    --popover: 30 8% 12%;
+    --popover-foreground: 40 20% 90%;
+    --primary: 40 20% 90%;
+    --primary-foreground: 30 10% 8%;
+    --secondary: 40 10% 60%;
+    --secondary-foreground: 30 10% 8%;
+    --accent: 38 50% 55%;
+    --accent-foreground: 30 10% 8%;
+    --muted: 30 8% 18%;
+    --muted-foreground: 40 10% 60%;
+    --border: 30 8% 25%;
+    --input: 30 8% 18%;
+    --ring: 40 20% 90%;
+    --chart-1: 40 20% 90%;
+    --chart-2: 38 50% 55%;
+    --chart-3: 40 10% 60%;
+    --chart-4: 145 50% 45%;
+    --chart-5: 0 65% 55%;
+    --sidebar-background: 30 8% 12%;
+    --sidebar-foreground: 40 20% 90%;
+    --sidebar-primary: 40 20% 90%;
+    --sidebar-primary-foreground: 30 10% 8%;
+    --sidebar-accent: 38 50% 55%;
+    --sidebar-accent-foreground: 30 10% 8%;
+    --sidebar-border: 30 8% 25%;
+    --sidebar-ring: 40 20% 90%;
+    --sidebar: 30 8% 12%;
+    --shadow-2xs: 0 1px 2px hsl(0 0% 0% / 0.2);
+    --shadow-xs: 0 1px 3px hsl(0 0% 0% / 0.25);
+    --shadow-sm: 0 2px 4px hsl(0 0% 0% / 0.3);
+    --shadow: 0 4px 6px hsl(0 0% 0% / 0.3);
+    --shadow-md: 0 6px 12px hsl(0 0% 0% / 0.35);
+    --shadow-lg: 0 8px 16px hsl(0 0% 0% / 0.35);
+    --shadow-xl: 0 12px 24px hsl(0 0% 0% / 0.4);
+    --shadow-2xl: 0 16px 32px hsl(0 0% 0% / 0.45);
   }
 }
 
@@ -223,372 +187,270 @@
 
   body {
     @apply bg-background text-foreground;
-    font-family: 'VT323', monospace;
+    font-family: 'Lora', Georgia, serif;
     font-feature-settings: "rlig" 1, "calt" 1;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    letter-spacing: 0.05em;
-    /* image-rendering: pixelated; - désactivé pour les photos */
+    letter-spacing: 0.01em;
+    line-height: 1.7;
   }
 
-  /* Scrollbar style arcade */
+  /* Scrollbar élégante */
   ::-webkit-scrollbar {
-    width: 12px;
-    height: 12px;
+    width: 8px;
+    height: 8px;
   }
 
   ::-webkit-scrollbar-track {
-    background: hsl(var(--background));
-    border: 2px solid hsl(var(--border));
+    background: hsl(var(--muted));
   }
 
   ::-webkit-scrollbar-thumb {
-    background: linear-gradient(180deg, hsl(var(--primary)), hsl(var(--primary) / 0.7));
-    border: 2px solid hsl(var(--border));
+    background: hsl(var(--border));
+    border-radius: 0;
   }
 
   ::-webkit-scrollbar-thumb:hover {
     background: hsl(var(--primary));
-    box-shadow: 0 0 10px hsl(var(--primary));
   }
 }
 
 /* ==========================================
-   CLASSES UTILITAIRES RPG
+   CLASSES UTILITAIRES JOURNAL
    ==========================================
 */
 
 @layer utilities {
   /* ------------------------------------------
-     DÉGRADÉS STYLE RPG
+     LIGNES DE SÉPARATION STYLE JOURNAL
      ------------------------------------------ */
+  .journal-divider {
+    border: none;
+    height: 1px;
+    background: hsl(var(--border));
+    margin: 1.5rem 0;
+  }
 
-  /* Dégradé ambre doux (XP/pièces) */
-  .gradient-primary {
+  .journal-divider-double {
+    border: none;
+    height: 3px;
     background: linear-gradient(
-      180deg,
+      to bottom,
       hsl(var(--primary)) 0%,
-      hsl(38 55% 45%) 100%
-    );
-  }
-
-  /* Dégradé texte arc-en-ciel rétro */
-  .gradient-text {
-    background: linear-gradient(
-      90deg,
-      hsl(var(--primary)) 0%,
-      hsl(var(--secondary)) 50%,
-      hsl(var(--tertiary)) 100%
-    );
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  /* ------------------------------------------
-     EFFETS DE LUEUR NÉON
-     ------------------------------------------ */
-
-  .glow-primary {
-    box-shadow: 
-      0 0 5px hsl(var(--primary)),
-      0 0 10px hsl(var(--primary)),
-      0 0 20px hsl(var(--primary) / 0.5),
-      0 0 40px hsl(var(--primary) / 0.3);
-  }
-
-  .glow-hover {
-    transition: box-shadow 0.2s ease;
-  }
-
-  .glow-hover:hover {
-    box-shadow: 
-      0 0 5px hsl(var(--primary)),
-      0 0 15px hsl(var(--primary)),
-      0 0 30px hsl(var(--primary) / 0.5);
-  }
-
-  /* ------------------------------------------
-     BORDURE STYLE PIXEL ART
-     ------------------------------------------ */
-
-  .pixel-border {
-    border: 3px solid hsl(var(--border));
-    border-radius: 16px;
-    box-shadow: 
-      inset -2px -2px 0 0 hsl(var(--border) / 0.3),
-      inset 2px 2px 0 0 hsl(var(--primary) / 0.2);
-  }
-
-  .pixel-border-animated {
-    border: 3px solid hsl(var(--primary));
-    border-radius: 16px;
-    animation: pixel-border-pulse 2.5s ease-in-out infinite;
-  }
-
-  /* ------------------------------------------
-     BOÎTE DE DIALOGUE RPG
-     ------------------------------------------ */
-  
-  .rpg-box {
-    background: linear-gradient(180deg, hsl(var(--card)) 0%, hsl(240 10% 8%) 100%);
-    border: 3px solid hsl(var(--primary));
-    border-radius: 20px;
-    box-shadow: 
-      0 0 0 2px hsl(var(--background)),
-      0 0 20px hsl(var(--primary) / 0.25);
-    position: relative;
-  }
-
-  .rpg-box::before {
-    content: "";
-    position: absolute;
-    inset: 6px;
-    border: 2px solid hsl(var(--primary) / 0.2);
-    border-radius: 14px;
-    pointer-events: none;
-  }
-
-  /* ------------------------------------------
-     FOND AVEC GRILLE SCANLINES
-     ------------------------------------------ */
-  .bg-grid {
-    background-image: 
-      repeating-linear-gradient(
-        0deg,
-        transparent,
-        transparent 2px,
-        hsl(var(--primary) / 0.03) 2px,
-        hsl(var(--primary) / 0.03) 4px
-      ),
-      repeating-linear-gradient(
-        90deg,
-        transparent,
-        transparent 2px,
-        hsl(var(--primary) / 0.02) 2px,
-        hsl(var(--primary) / 0.02) 4px
-      );
-    background-size: 4px 4px;
-  }
-
-  /* Effet scanlines CRT */
-  .scanlines::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: repeating-linear-gradient(
-      0deg,
-      transparent,
+      hsl(var(--primary)) 1px,
       transparent 1px,
-      hsl(0 0% 0% / 0.1) 1px,
-      hsl(0 0% 0% / 0.1) 2px
+      transparent 2px,
+      hsl(var(--primary)) 2px,
+      hsl(var(--primary)) 3px
     );
-    pointer-events: none;
+    margin: 1.5rem 0;
   }
 
-  /* ------------------------------------------
-     EFFET DE VERRE (GLASSMORPHISM) RPG
-     ------------------------------------------ */
-  .glass {
-    background: hsl(var(--card) / 0.85);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    border: 2px solid hsl(var(--primary) / 0.3);
+  .journal-divider-ornate {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 1.5rem 0;
   }
 
-  /* ------------------------------------------
-     BADGE STYLE 8-BIT
-     ------------------------------------------ */
-  .pixel-badge {
-    background: linear-gradient(180deg, hsl(var(--primary)) 0%, hsl(38 55% 45%) 100%);
-    color: hsl(var(--primary-foreground));
-    padding: 4px 14px;
-    font-family: 'Press Start 2P', cursive;
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    border: 2px solid hsl(var(--primary-foreground) / 0.15);
-    border-radius: 10px;
-    box-shadow: 
-      0 3px 6px hsl(38 45% 35% / 0.3),
-      0 0 8px hsl(var(--primary) / 0.3);
-  }
-
-  /* ------------------------------------------
-     BARRE DE SANTÉ/XP
-     ------------------------------------------ */
-  .xp-bar {
-    background: hsl(var(--muted));
-    border: 2px solid hsl(var(--border));
-    border-radius: 8px;
-    height: 16px;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .xp-bar::before {
+  .journal-divider-ornate::before,
+  .journal-divider-ornate::after {
     content: "";
-    position: absolute;
-    inset: 2px;
-    background: linear-gradient(90deg, hsl(var(--primary)) 0%, hsl(var(--primary-glow)) 100%);
-    box-shadow: 0 0 10px hsl(var(--primary));
+    flex: 1;
+    height: 1px;
+    background: hsl(var(--border));
   }
 
   /* ------------------------------------------
-     TEXTE STYLE PIXEL
+     ENCADRÉ STYLE JOURNAL
      ------------------------------------------ */
-  .pixel-text {
-    font-family: 'Press Start 2P', cursive;
-    text-shadow: 
-      2px 2px 0 hsl(var(--background)),
-      -1px -1px 0 hsl(var(--primary) / 0.5);
+  .journal-box {
+    background: hsl(var(--card));
+    border: 1px solid hsl(var(--border));
+    position: relative;
   }
 
-  .retro-text {
-    font-family: 'VT323', monospace;
-    font-size: 1.25em;
+  .journal-box-bordered {
+    background: hsl(var(--card));
+    border: 2px solid hsl(var(--primary));
+    position: relative;
+  }
+
+  /* ------------------------------------------
+     TYPOGRAPHIE JOURNAL
+     ------------------------------------------ */
+  .headline {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+
+  .subheadline {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-size: 0.875rem;
+  }
+
+  .body-text {
+    font-family: 'Lora', Georgia, serif;
+    line-height: 1.8;
+  }
+
+  .caption-text {
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.75rem;
+    text-transform: uppercase;
     letter-spacing: 0.1em;
+  }
+
+  /* ------------------------------------------
+     LETTRINE (DROP CAP)
+     ------------------------------------------ */
+  .drop-cap::first-letter {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 4rem;
+    font-weight: 700;
+    float: left;
+    line-height: 0.8;
+    margin-right: 0.5rem;
+    margin-top: 0.1rem;
+    color: hsl(var(--primary));
+  }
+
+  /* ------------------------------------------
+     BADGE STYLE JOURNAL
+     ------------------------------------------ */
+  .journal-badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    border: 1px solid hsl(var(--primary));
+    background: transparent;
+    color: hsl(var(--primary));
+  }
+
+  .journal-badge-filled {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    background: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+  }
+
+  /* ------------------------------------------
+     BARRE DE PROGRESSION STYLE INDEX
+     ------------------------------------------ */
+  .progress-bar {
+    height: 4px;
+    background: hsl(var(--muted));
+    position: relative;
+  }
+
+  .progress-bar-fill {
+    height: 100%;
+    background: hsl(var(--primary));
+    transition: width 0.5s ease-out;
+  }
+
+  /* ------------------------------------------
+     EFFET PAPIER
+     ------------------------------------------ */
+  .paper-texture {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.02'%3E%3Cpath opacity='.5' d='M96 95h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9zm-1 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  /* ------------------------------------------
+     COLONNE STYLE JOURNAL
+     ------------------------------------------ */
+  .newspaper-columns {
+    column-count: 2;
+    column-gap: 2rem;
+    column-rule: 1px solid hsl(var(--border));
+  }
+
+  @media (max-width: 768px) {
+    .newspaper-columns {
+      column-count: 1;
+    }
   }
 }
 
 /* ==========================================
-   ANIMATIONS KEYFRAMES RPG
+   ANIMATIONS KEYFRAMES
    ==========================================
 */
 
-@keyframes pixel-border-pulse {
-  0%, 100% {
-    border-color: hsl(var(--primary));
-    box-shadow: 0 0 8px hsl(var(--primary) / 0.35);
-  }
-  50% {
-    border-color: hsl(var(--secondary));
-    box-shadow: 0 0 12px hsl(var(--secondary) / 0.35);
-  }
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-@keyframes gradient-rotate {
-  0%, 100% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-}
-
-/* Animation de flottement style sprite */
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-8px);
-  }
-}
-
-/* Animation de pulsation douce */
-@keyframes pulse-glow {
-  0%, 100% {
-    opacity: 0.9;
-  }
-  50% {
-    opacity: 1;
-  }
-}
-
-/* Animation d'apparition depuis le bas */
 @keyframes slide-up {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-/* Animation d'apparition avec scale */
 @keyframes scale-in {
-  from {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
 }
 
-/* Animation de typing style terminal */
 @keyframes typing {
-  from {
-    width: 0;
-  }
-  to {
-    width: 100%;
-  }
+  from { width: 0; }
+  to { width: 100%; }
 }
 
-@keyframes blink-caret {
-  from, to {
-    border-color: transparent;
-  }
-  50% {
-    border-color: hsl(var(--primary));
-  }
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
 }
 
-/* Animation des particules (étoiles/pixels) */
-@keyframes particle-float {
-  0% {
-    transform: translateY(100vh) rotate(0deg);
-    opacity: 0;
-  }
-  5% {
-    opacity: 1;
-  }
-  95% {
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(-10vh) rotate(360deg);
-    opacity: 0;
-  }
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
 }
 
-/* Animation de clignotement arcade */
-@keyframes arcade-blink {
-  0%, 49% {
-    opacity: 1;
-  }
-  50%, 100% {
-    opacity: 0.7;
-  }
+/* Accordion animations */
+@keyframes accordion-down {
+  from { height: 0; opacity: 0; }
+  to { height: var(--radix-accordion-content-height); opacity: 1; }
 }
 
-/* Animation coin pickup */
-@keyframes coin-spin {
-  0% {
-    transform: rotateY(0deg);
-  }
-  100% {
-    transform: rotateY(360deg);
-  }
+@keyframes accordion-up {
+  from { height: var(--radix-accordion-content-height); opacity: 1; }
+  to { height: 0; opacity: 0; }
 }
 
-/* Animation level up */
-@keyframes level-up {
-  0% {
-    transform: scale(1);
-    filter: brightness(1);
-  }
-  50% {
-    transform: scale(1.1);
-    filter: brightness(1.5);
-  }
-  100% {
-    transform: scale(1);
-    filter: brightness(1);
-  }
+/* Animation classes */
+.animate-fade-in {
+  animation: fade-in 0.4s ease-out forwards;
+}
+
+.animate-slide-up {
+  animation: slide-up 0.4s ease-out forwards;
+}
+
+.animate-scale-in {
+  animation: scale-in 0.3s ease-out forwards;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-accordion-down {
+  animation: accordion-down 0.2s ease-out;
+}
+
+.animate-accordion-up {
+  animation: accordion-up 0.2s ease-out;
 }
