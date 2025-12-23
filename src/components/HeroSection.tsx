@@ -81,19 +81,6 @@ export function HeroSection() {
           <div className="flex-1 h-px bg-border max-w-24" />
         </div>
 
-        {/* Badges gaming style */}
-        <div className="flex flex-wrap justify-center gap-3 mb-8">
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-accent/10 border border-accent/30 text-accent text-xs font-mono">
-            🎮 +10 Gaming
-          </span>
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-accent/10 border border-accent/30 text-accent text-xs font-mono">
-            🏆 +10 Sports
-          </span>
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-accent/10 border border-accent/30 text-accent text-xs font-mono">
-            📺 +10 Animés
-          </span>
-        </div>
-
         {/* Double ligne décorative */}
         <div className="journal-divider-double mb-8" />
 
